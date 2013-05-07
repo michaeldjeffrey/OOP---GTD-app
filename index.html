@@ -1,10 +1,116 @@
-<html>
-<head>
-	
-	<title>testing objects</title>
-	<script src='TodoObject.js'></script>
-</head>
-<body>
-	
-</body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sign in &middot; Twitter Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='css/main.css'/>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="formAddNew container">
+    	<div class="text-right">
+        <form class="form-search">
+        	<button data-toggle="tooltip" title="Sort by today" class="icon btn">Today</button>
+        	<img data-toggle="tooltip" title="Sort by calender day" class="icon" src="img/calender-icon.png">
+        	<button data-toggle="tooltip" title="Show all" class="icon btn">All</button>
+          <input type="text" class="input-medium search-query">
+          <button type="submit" class="btn">Search</button>
+        </form>
+      </div>
+      <hr class="topBarDivider">
+      <div class="text-left">
+        <form class="form-inline text-center">
+          <input type="text" class="span5 input-large" placeholder="new item">
+          <div class="btn-group">
+            <button class="unselectable btn btn-medium btn-primary">Add</button>
+            <a href="#myModal" role="button" class="unselectable btn btn-medium btn-primary" data-toggle="modal">Options</a>
+          </div>
+        </form>
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Add Item Options</h3>
+          </div>
+          <div class="modal-body">
+            <form>
+              <textarea class="span5" rows="5" placeholder="description..."></textarea>
+          		<input type="text" class="span5 input-large" placeholder="Tags...">
+              <hr>
+              <span class="modalBtn">
+                <p class="disInline noMargin">Due: </p>
+                <div class="dropdown disInline">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Today</a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li><a>Tomorrow</a></li>
+                    <li><a>The Next Day</a></li>
+                    <li><a>Calendar</a></li>
+                  </ul>
+                </div>
+              </span>
+              <div class="disInline dropdown">
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Repeat</a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline" >Sunday</p></a></li>
+                  <li><a class="unselectable"><input type="checkbox">Monday</a></li>
+                  <li><a class="unselectable"><input type="checkbox">Tuesday</a></li>
+                  <li><a class="unselectable"><input type="checkbox">Wednesday</a></li>
+                  <li><a class="unselectable"><input type="checkbox">Thursday</a></li>
+                  <li><a class="unselectable"><input type="checkbox">Friday</a></li>
+                  <li><a class="unselectable"><input type="checkbox">Saturday</a></li>
+                </ul>
+              </div>
+              <div class="disInline dropdown">
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Importance</a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li><a>High</a></li>
+                  <li><a>Med</a></li>
+                  <li><a>Low</a></li>
+                </ul>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="unselectable btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="unselectable btn btn-primary">Add Item</button>
+          </div>
+        </div>
+        <div class="accordion" id="accordion2">
+          <div class="accordion-group">
+            <div class="accordion-heading text-left">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                Pick up kids
+              </a>
+            </div>
+            <div id="collapseOne" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <p class="text-right">due in 3 hours</p>
+                <p>Need to pick up kids at soccer practice on 123 someWhere street.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-group">
+            <div class="accordion-heading text-left">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                Mow Lawn
+              </a>
+            </div>
+            <div id="collapseTwo" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <p class="text-right">due in 2 hours</p>
+                <p>need to mix gas for the mower before using it.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
 </html>
