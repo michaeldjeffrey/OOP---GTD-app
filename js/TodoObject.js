@@ -67,3 +67,7 @@ Object.defineProperty(Task.prototype, 'priority',{
 });
 
 PriorityMap = ["doesn't need to get done",'Just a reminder','Do this now']
+
+function throwErr(msg){
+	// throw new Error(msg)
+}

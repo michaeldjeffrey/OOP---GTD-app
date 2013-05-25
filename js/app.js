@@ -9,7 +9,7 @@ $(function(){
 		e.preventDefault();
 		var value = $('#addText').val();	
 		tasks.push(makeTask(new Task({text: value, priority: 0})));
-		$('#taskTitle').val('');
+		$('.taskTitle').val('');
 	});
 
 	$("#optionsAdd").on('click', function(){
@@ -39,7 +39,8 @@ $(function(){
 	
 
 
-	function makeTask (i, task){
+	function makeTask (task){
+		var i = tasks.length;
 		var ac_group = $(document.createElement('div'))
 					.addClass('accordion-group');
 		var ac_heading = $(document.createElement('div'))
@@ -73,13 +74,6 @@ $(function(){
 		
 		return task;
 	}
-	//might need l8er
-/*	$.each(tasks, function(index, value){
-		makeTask(index, value)
-	});*/
-
-
-
 
 
 $("#optionsTags").select2({
@@ -90,6 +84,5 @@ $("#optionsTags").select2({
 });
 $("#clockpick").clockpick();
 $("#datepicker").datepicker();
-	}
 
 });
