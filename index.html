@@ -8,15 +8,17 @@
     <meta name="author" content="">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/chosen.css" rel="stylesheet">
+    <link href="ui-lightness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
     <link rel='stylesheet' type='text/css' href='css/main.css'/>
   </head>
   <body>
     <div class="formAddNew container">
-    	<div class="text-right">
+      <div class="text-right">
         <form class="form-search">
-        	<button data-toggle="tooltip" title="Sort by today" class="icon btn">Today</button>
-        	<img data-toggle="tooltip" title="Sort by calender day" class="icon" src="img/calender-icon.png">
-        	<button data-toggle="tooltip" title="Show all" class="icon btn">All</button>
+          <button data-toggle="tooltip" title="Sort by today" class="icon btn">Today</button>
+          <img data-toggle="tooltip" title="Sort by calender day" class="icon" src="img/calender-icon.png">
+          <button data-toggle="tooltip" title="Show all" class="icon btn">All</button>
           <input type="text" class="input-medium search-query">
           <button type="submit" class="btn">Search</button>
         </form>
@@ -37,9 +39,9 @@
           </div>
           <div class="modal-body">
             <form>
-            	<input type="text" id="optionsText" class="span5 input-large taskTitle" placeholder="new item">
+              <input type="text" id="optionsText" class="span5 input-large taskTitle" placeholder="new item">
               <textarea class="span5" rows="5" placeholder="description..." id='optionsDescription'></textarea>
-          		<input type="text" class="span5 input-large" placeholder="Tags..." id='optionsTags'>
+              <input type="text" class="span5 input-large" placeholder="Tags..." id='optionsTags'>
               <!-- <hr> -->
               <div class="input-prepend input-append duedate">
                 <span class="add-on">Due</span>
@@ -75,35 +77,14 @@
           </div>
         </div>
         <div class="accordion" id="accordion2">
-          <div class="accordion-group">
-            <div class="accordion-heading text-left">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Pick up kids</a>
-            </div>
-            <div id="collapseOne" class="accordion-body collapse">
-              <div class="accordion-inner">
-                <p class="text-right">due in 3 hours</p>
-                <p>Need to pick up kids at soccer practice on 123 someWhere street.</p>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-group">
-            <div class="accordion-heading text-left">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Mow Lawn</a>
-            </div>
-            <div id="collapseTwo" class="accordion-body collapse">
-              <div class="accordion-inner">
-                <p class="text-right">due in 2 hours</p>
-                <p>need to mix gas for the mower before using it.</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.0/select2.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/clockpick.js"></script>
     <script type="text/javascript" src="js/TodoObject.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
