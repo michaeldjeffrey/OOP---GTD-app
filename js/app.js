@@ -37,8 +37,9 @@ $(function(){
 		$(".taskTitle").val($(this).val());
 	});
 	
-	function makeTask (task){
-		var i = tasks.length;
+
+
+	function makeTask (i, task){
 		var ac_group = $(document.createElement('div'))
 					.addClass('accordion-group');
 		var ac_heading = $(document.createElement('div'))
@@ -79,9 +80,7 @@ $(function(){
 
 
 
-$("#optionsTags").on('keydown', function(evt){
-	console.log(evt.keyCode)
-})
+
 
 $("#optionsTags").select2({
   tags:tagsArray,
@@ -91,4 +90,6 @@ $("#optionsTags").select2({
 });
 $("#clockpick").clockpick();
 $("#datepicker").datepicker();
+	}
+
 });
