@@ -1,44 +1,26 @@
 // JSON stringify to store in local storage
 // JSON parse to read from local storage
 $(function(){
-	var tasks = [];
-	//fill tags array when tasks are recieved from local storage
-	var tagsArray = [];
-	
-	$('#addBtn').on('click', function(e){
-		e.preventDefault();
-		var value = $('#addText').val();	
-		tasks.push(makeTask(new Task({text: value, priority: 0})));
-		$('#taskTitle').val('');
-	});
 
-	$("#optionsAdd").on('click', function(){
-		var title = $(".taskTitle");
-		var description = $("#optionsDescription");
-		var tags = $("#optionsTags");
-		var duedate = $("#clockpick").val() + $("#datepicker").val();
-		var task = new Task({
-			text: title.val(),
-			description: description.val(),
-			tags: tags.val(),
-			due_date: duedate,
-			// priority: priority,
-			// repeat: repeat,
-		});
-		tasks.push(makeTask(task));
-		$("#myModal").modal('hide');
-		title.val('');
-		description.val('');
-		tag.val('');
-		duedate.val('');
+
+	var obj1 = new Task({
+ 		text : 'Task 1 playa',
+		description : 'This is the first task that we are trying to render',
+		priority : 0,
+	});	
+	var obj2 = new Task({
+ 		text : 'Task 2 Michael',
+		description : 'This is the second task that we are trying to render',
+		priority : 1,
 	});
-	
-	$(".taskTitle").keyup(function(){
-		$(".taskTitle").val($(this).val());
+	var obj3 = new Task({
+ 		text : 'Task 3 Jake',
+		description : 'This is the third task that we are trying to render',
+		priority : 2,
 	});
-	
-	function makeTask (task){
-		var i = tasks.length;
+	var tasks = [obj1,obj2,obj3]
+
+	function makeTask (i, task){
 		var ac_group = $(document.createElement('div'))
 					.addClass('accordion-group');
 		var ac_heading = $(document.createElement('div'))
@@ -69,26 +51,9 @@ $(function(){
 		ac_heading.append(ac_toggle)
 		ac_group.append(ac_heading).append(collapse)
 		$(".accordion").append(ac_group);
-		
-		return task;
 	}
-	//might need l8er
-/*	$.each(tasks, function(index, value){
+
+	$.each(tasks, function(index, value){
 		makeTask(index, value)
-	});*/
-
-
-
-$("#optionsTags").on('keydown', function(evt){
-	console.log(evt.keyCode)
-})
-
-$("#optionsTags").select2({
-  tags:tagsArray,
-  tokenSeparators: [",", " "]
-}).on("select2-selecting", function(e) { 
-	tagsArray.push(e.val);
-});
-$("#clockpick").clockpick();
-$("#datepicker").datepicker();
+	})
 });
