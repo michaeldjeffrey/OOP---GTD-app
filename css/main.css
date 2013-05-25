@@ -48,6 +48,7 @@ body {
 .day{
 	margin-left:5px;
 }
+<<<<<<< HEAD
 .whitebg{
 	background: #fff !important;
 	text-align: left !important;
@@ -116,3 +117,5 @@ z-index: 4000;
 background-color:#ffffff;
 z-index: 4000;
 }
+=======
+>>>>>>> 1b77ff630709746fe0ef1aeb2d8752cef85500cb
