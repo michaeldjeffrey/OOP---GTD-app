@@ -4,33 +4,52 @@ $(function(){
 	var tasks = [];
 	//fill tags array when tasks are recieved from local storage
 	var tagsArray = [];
+
+	$('.icon').tooltip();
+
+	function makeSortable(){
+		if(tasks.length === 2){
+			$( ".accordion" ).sortable();
+			$( ".accordion" ).disableSelection();
+		}
+	}
 	
 	$('#addBtn').on('click', function(e){
 		e.preventDefault();
 		var value = $('#addText').val();	
 		tasks.push(makeTask(new Task({text: value, priority: 0})));
 		$('.taskTitle').val('');
+<<<<<<< HEAD
+=======
+		makeSortable()
+>>>>>>> jake_features
 	});
 
 	$("#optionsAdd").on('click', function(){
 		var title = $(".taskTitle");
 		var description = $("#optionsDescription");
 		var tags = $("#optionsTags");
-		var duedate = $("#clockpick").val() + $("#datepicker").val();
+		var date = $("#datepicker");
+		var time = $("#clockpick");
+		var duedate = time.val() + " " + date.val();
+		var dueFromNow = moment(duedate).fromNow();   //.format("h a dddd M/D");
 		var task = new Task({
 			text: title.val(),
 			description: description.val(),
 			tags: tags.val(),
-			due_date: duedate,
+			due_date: dueFromNow,
 			// priority: priority,
 			// repeat: repeat,
 		});
 		tasks.push(makeTask(task));
+		console.log(task);
 		$("#myModal").modal('hide');
 		title.val('');
 		description.val('');
-		tag.val('');
-		duedate.val('');
+		tags.select2('data', null)
+		date.val('');
+		time.val('');
+		makeSortable()
 	});
 	
 	$(".taskTitle").keyup(function(){
@@ -51,7 +70,9 @@ $(function(){
 					.attr('data-parent', '#accordion2')
 					.attr('href','#collapse'+i) // Specific to each accordion instance
 					.text(task.text);
-
+		var ac_due = $(document.createElement('span'))
+					.addClass('pull-right')
+					.text('Due ' + task.due_date);
 
 		var collapse = $(document.createElement('div'))
 					.addClass('accordion-body collapse')
@@ -59,19 +80,16 @@ $(function(){
 		var ac_inner = $(document.createElement('div'))
 					.addClass('accordion-inner');
 		var p1 = $(document.createElement('p'))
-					.addClass('text-right')
-					.text('Due in 2 hours'); // Specific to each accordion instance
-		var p2 = $(document.createElement('p'))
 					.text(task.description);
 
-		ac_inner.append(p1).append(p2);
-		collapse.append(ac_inner)
+		ac_inner.append(p1);
+		collapse.append(ac_inner);
 
-
-		ac_heading.append(ac_toggle)
-		ac_group.append(ac_heading).append(collapse)
+		ac_toggle.append(ac_due);
+		ac_heading.append(ac_toggle);
+		ac_group.append(ac_heading).append(collapse);
 		$(".accordion").append(ac_group);
-		
+
 		return task;
 	}
 
