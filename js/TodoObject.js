@@ -5,7 +5,7 @@ function Task (obj) {
 	this._id = Math.floor(Math.random()*100) // init to number of tasks +1
 	this.status = obj.status || 'incomplete' // init to incomplete
 	this.text = obj.text || throwErr("need text to make a task") //throw "Text Required" 
-	this.description = obj.description || throwErr('need a description so you know what to do ') // init to description if provided
+	this.description = obj.description || "This item has no details";//throwErr('need a description so you know what to do ') // init to description if provided
 	this.priority = obj.priority || 0 // init to low
 
 	this.tags = [];
@@ -20,7 +20,7 @@ function Task (obj) {
 
 	//this.is_parent initialized within subtask setting
 	this.date_created = obj.date_created || new Date(); // init to current date
-	this.due_date = obj.due_date || null // init to null
+	this.due_date = obj.due_date || 'Today' // init to null
 	this.alert = obj.alert || false // init to false
 
 	// make an object standard for tasks that are repeated
