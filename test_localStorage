@@ -1,40 +1,14 @@
-function supports_html5_storage(){
-  try {
-  	return 'localStorage' in window && window['localStorage'] !== null;
-  	} catch (e) {
-  		return false;
-  		}
-  	
-  	if (window.addEventListener) {
-  		window.addEventListener('storage', handle_storage);
-  		};
-  		
+function saveTask_localStorage (task) {
+	localStorage.setItem(localStorage.length, JSON.stringify(task));
 }
 
-			var testObject = { 'one' : 1, 'two' : 2, 'three' : 3 };
-			
-			// Put the object into storage
-			localStorage.setItem('testObject', JSON.stringify('testObject'));
-			
-			// Retrieve the object from storage
-			var retrievedObject = localStorage.getItem('testObject');
-			
-			console.log('retrievedObject: ', JSON.parse(retrievedObject));
-			
-			// var item = sessionStorage.getItem(yourkey);
-			
-			// var name = sessionStorage.getItem('name');
-(function(){
-	localStorage.setItem('name', 'john');
-	localStorage.setItem('name2', 'Michael');
-	localStorage.setItem('name3', 'Troy');
-	localStorage.setItem('name4', 'Jake');
-	localStorage.setItem('name5', 'Zane');
-	console.log("john has been");
-	var array = [];
-	for (var key in localStorage){
-		array.push(localStorage[key])
+function retrieve_localStorage(){
+	var a = [];
+	for ( var i = 0; i < localStorage.length; i++){
+		a.push(JSON.parse(localStorage.getItem(i)));
+		}
+		console.log('from retrieve localStorage',a);
+		// put all tasks into an array
 	}
-	console.log(array)
-	})();
-  
+
+			
