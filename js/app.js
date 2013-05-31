@@ -9,8 +9,7 @@ $(function(){
 
 	function makeSortable(){
 		if(tasks.length === 2){
-			$( ".accordion" ).sortable();
-			$( ".accordion" ).disableSelection();
+			$( ".accordion" ).sortable().disableSelection();
 		}
 	}
 	
@@ -19,10 +18,7 @@ $(function(){
 		var value = $('#addText').val();	
 		tasks.push(makeTask(new Task({text: value, priority: 0})));
 		$('.taskTitle').val('');
-<<<<<<< HEAD
-=======
 		makeSortable()
->>>>>>> jake_features
 	});
 
 	$("#optionsAdd").on('click', function(){
