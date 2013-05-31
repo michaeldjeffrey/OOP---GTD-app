@@ -125,3 +125,18 @@ z-index: 4000;
 	background: #eee;
 	text-decoration: none;
 }
+
+
+
+
+.addSubTask{
+	color: rgb(50, 150, 50);
+	font-size: 24px;
+	margin-left: 5px;
+}
+.addSubTask:hover{
+	color: rgb(30, 130, 30);
+}
+.addSubTask:active{
+	color: rgb(20, 120, 20);
+}

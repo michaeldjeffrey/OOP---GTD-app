@@ -21,6 +21,10 @@ $(function(){
 		makeSortable()
 	});
 
+	$(".addSubTask").on('click', function(){
+		$(this).parent().append("<br><input class='clearfix input-large' type='text' name='subTaskTitle' placeholder='subtask title'> ")
+	})
+
 	$("#optionsAdd").on('click', function(){
 		var title = $(".taskTitle");
 		var description = $("#optionsDescription");
@@ -29,11 +33,16 @@ $(function(){
 		var time = $("#clockpick");
 		var duedate = time.val() + " " + date.val();
 		var dueFromNow = moment(duedate).fromNow();   //.format("h a dddd M/D");
+		var subtasks = [];
+		$("[name='subTaskTitle']").each(function(i){
+			if($(this).val().trim() !== '') subtasks.push({text: $(this).val()})
+		})
 		var task = new Task({
 			text: title.val(),
 			description: description.val(),
 			tags: tags.val(),
 			due_date: dueFromNow,
+			subtasks: subtasks,
 			// priority: priority,
 			// repeat: repeat,
 		});
@@ -84,8 +93,12 @@ $(function(){
 		ac_toggle.append(ac_due);
 		ac_heading.append(ac_toggle);
 		ac_group.append(ac_heading)//.append(collapse);
-		if(task.description !== null){
+		if(task.description !== null || task.subtasks !== null){
 			ac_group.append(collapse);
+			for (var sub = 0; sub < task.subtasks.length; sub++) {
+				collapse.append("<div class='alert alert-info'>"+task.subtasks[sub].text+"</div>")
+			}
+			
 		}
 		$(".accordion").append(ac_group);
 
