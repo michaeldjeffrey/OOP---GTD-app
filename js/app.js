@@ -70,6 +70,19 @@ $(function(){
 					.addClass('pull-right')
 					.text('Due ' + task.due_date);
 
+		var star = 'low';
+
+		if(task.importance === 'low'){
+			star = "icon-star-empty";
+		}else if(task.importance === 'med'){
+			star = "icon-star-half-empty";
+		}else{
+			star = "icon-star";
+		}
+
+		var ac_importance = $(document.createElement('i')) //make this: <i class="icon-star-empty"></i>
+					.addClass(star + " pull-right star");
+
 		var collapse = $(document.createElement('div'))
 					.addClass('accordion-body collapse')
 					.attr('id', 'collapse'+i); // Specific to each accordion instance
@@ -81,7 +94,7 @@ $(function(){
 		ac_inner.append(p1);
 		collapse.append(ac_inner);
 
-		ac_toggle.append(ac_due);
+		ac_toggle.append(ac_due).append(ac_importance);
 		ac_heading.append(ac_toggle);
 		ac_group.append(ac_heading)//.append(collapse);
 		if(task.description !== null){
