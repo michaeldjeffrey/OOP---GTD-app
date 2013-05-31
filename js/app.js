@@ -83,7 +83,10 @@ $(function(){
 
 		ac_toggle.append(ac_due);
 		ac_heading.append(ac_toggle);
-		ac_group.append(ac_heading).append(collapse);
+		ac_group.append(ac_heading)//.append(collapse);
+		if(task.description !== null){
+			ac_group.append(collapse);
+		}
 		$(".accordion").append(ac_group);
 
 		return task;
