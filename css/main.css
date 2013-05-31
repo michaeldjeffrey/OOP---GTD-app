@@ -117,3 +117,11 @@ background-color:#ffffff;
 z-index: 4000;
 }
 
+
+
+/* Accordion styling */
+.accordion-heading 
+.accordion-toggle:hover{
+	background: #eee;
+	text-decoration: none;
+}
