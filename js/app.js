@@ -1,9 +1,10 @@
 // JSON stringify to store in local storage
 // JSON parse to read from local storage
+	var tasks = retrieve_localStorage()
 $(function(){
-	var tasks = [];
 	//fill tags array when tasks are recieved from local storage
 	var tagsArray = [];
+	
 
 	$('.icon').tooltip();
 
@@ -16,7 +17,9 @@ $(function(){
 	$('#addBtn').on('click', function(e){
 		e.preventDefault();
 		var value = $('#addText').val();	
-		tasks.push(makeTask(new Task({text: value, priority: 0})));
+		var task = new Task({text: value, priority: 0})
+		tasks.push(makeTask(task));
+		saveTask_localStorage(task)
 		$('.taskTitle').val('');
 		makeSortable()
 	});
@@ -47,6 +50,8 @@ $(function(){
 			// repeat: repeat,
 		});
 		tasks.push(makeTask(task));
+		console.log("the task should be in local storage fromNow")
+		saveTask_localStorage(task)
 		console.log(task);
 		$("#myModal").modal('hide');
 		title.val('');
@@ -65,6 +70,7 @@ $(function(){
 
 
 	function makeTask (task){
+		console.log('makeTask called')
 		var i = tasks.length;
 		var ac_group = $(document.createElement('div'))
 					.addClass('accordion-group')
@@ -132,5 +138,12 @@ $("#optionsTags").select2({
 });
 $("#clockpick").clockpick();
 $("#datepicker").datepicker();
+
+
+
+	for (var i = 0; i < tasks.length; i++) {
+		console.log("making task", i)
+		if(tasks[i] !== null) makeTask(tasks[i]);
+	}
 
 });
