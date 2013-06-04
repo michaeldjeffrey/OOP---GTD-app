@@ -60,21 +60,24 @@ $(function(){
 	$(".taskTitle").keyup(function(){
 		$(".taskTitle").val($(this).val());
 	});
+
 	
 
 
 	function makeTask (task){
 		var i = tasks.length;
 		var ac_group = $(document.createElement('div'))
-					.addClass('accordion-group');
+					.addClass('accordion-group')
+					.attr('id', task._id)
 		var ac_heading = $(document.createElement('div'))
 					.addClass('accordion-heading text-left')
+					.prepend("<input type='checkbox' class='status'>")
 		var ac_toggle = $(document.createElement('a'))
 					.addClass('accordion-toggle')
 					.attr('data-toggle', 'collapse')
 					.attr('data-parent', '#accordion2')
 					.attr('href','#collapse'+i) // Specific to each accordion instance
-					.text(task.text);
+					.text(task.text)
 		var ac_due = $(document.createElement('span'))
 					.addClass('pull-right')
 					.text('Due ' + task.due_date);
@@ -101,6 +104,21 @@ $(function(){
 			
 		}
 		$(".accordion").append(ac_group);
+
+	$("#"+task._id).find(".status").on('change', function(){
+		var comp = $(this).parent().parent().prop('id');
+		if($(this).prop('checked') == true){
+			$(this).parent().addClass('completed');
+			for (var i = 0; i < tasks.length; i++) {
+				if(comp == tasks[i]._id) tasks[i].status = 'completed'
+			}
+		} else {
+			$(this).parent().removeClass('completed');
+			for (var i = 0; i < tasks.length; i++) {
+				if(comp == tasks[i]._id) tasks[i].status = 'incomplete'
+			}
+		}
+	})
 
 		return task;
 	}
