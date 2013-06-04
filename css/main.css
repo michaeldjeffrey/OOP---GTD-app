@@ -140,3 +140,13 @@ z-index: 4000;
 .addSubTask:active{
 	color: rgb(20, 120, 20);
 }
+.status{
+	margin: 10px 0px 0px -20px !important;
+}
+.completed .accordion-toggle{
+	text-decoration: line-through;
+	color: #999 !important;
+}
+.accordion-toggle{
+	margin-top: -23px;
+}
