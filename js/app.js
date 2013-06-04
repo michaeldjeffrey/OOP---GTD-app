@@ -50,7 +50,6 @@ $(function(){
 			// repeat: repeat,
 		});
 		tasks.push(makeTask(task));
-		console.log("the task should be in local storage fromNow")
 		saveTask_localStorage(task)
 		console.log(task);
 		$("#myModal").modal('hide');
@@ -78,6 +77,10 @@ $(function(){
 		var ac_heading = $(document.createElement('div'))
 					.addClass('accordion-heading text-left')
 					.prepend("<input type='checkbox' class='status'>")
+					if(task.status == "completed"){
+						console.log("adding completed class")
+						ac_heading.addClass("completed");
+					}
 		var ac_toggle = $(document.createElement('a'))
 					.addClass('accordion-toggle')
 					.attr('data-toggle', 'collapse')
@@ -113,16 +116,16 @@ $(function(){
 
 	$("#"+task._id).find(".status").on('change', function(){
 		var comp = $(this).parent().parent().prop('id');
+		var status;
 		if($(this).prop('checked') == true){
 			$(this).parent().addClass('completed');
-			for (var i = 0; i < tasks.length; i++) {
-				if(comp == tasks[i]._id) tasks[i].status = 'completed'
-			}
+			status = 'completed';
 		} else {
 			$(this).parent().removeClass('completed');
-			for (var i = 0; i < tasks.length; i++) {
-				if(comp == tasks[i]._id) tasks[i].status = 'incomplete'
-			}
+			status = "incomplete";
+		}
+		for (var i = 1; i < tasks.length; i++) {
+				if(comp == tasks[i]._id) tasks[i].status = status
 		}
 	})
 
@@ -141,9 +144,9 @@ $("#datepicker").datepicker();
 
 
 
-	for (var i = 0; i < tasks.length; i++) {
+	for (var i = 1; i < tasks.length; i++) {
 		console.log("making task", i)
-		if(tasks[i] !== null) makeTask(tasks[i]);
+		makeTask(tasks[i]);
 	}
 
 });
