@@ -1,5 +1,5 @@
 function saveTask_localStorage (task) {
-	localStorage.setItem(localStorage.length + 1, JSON.stringify(task));
+	localStorage.setItem(task._id, JSON.stringify(task));
 }
 
 function retrieve_localStorage(){

@@ -3,7 +3,7 @@ function Task (obj) {
 	//console.log('Task object created', 'obj: ' + JSON.stringify(obj))
 
 	// this._id = Math.floor(Math.random()*100) // init to number of tasks +1
-	this._id = tasks.length + 1; // init to number of tasks +1
+	this._id = localStorage.length + 1; // init to number of tasks +1
 	this.status = obj.status || 'incomplete' // init to incomplete
 	this.text = obj.text || throwErr("need text to make a task") //throw "Text Required" 
 	this.description = obj.description || null;//throwErr('need a description so you know what to do ') // init to description if provided
