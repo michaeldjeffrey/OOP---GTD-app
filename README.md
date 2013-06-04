@@ -6,7 +6,7 @@ TODO list
 - [ ] Different Themes  
 - [x] Adding Tasks  
 - [x] Prioritize tasks  
-- [ ] Completing Tasks  
+- [x] Completing Tasks  
 - [ ] Removing Completed Tasks  
 - [ ] Removing Uncompleted Tasks  
 - [ ] View Archive  
