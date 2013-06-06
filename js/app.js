@@ -21,7 +21,7 @@ $(function(){
 		tasks.push(makeTask(task));
 		saveTask_localStorage(task)
 		$('.taskTitle').val('');
-		makeSortable()
+		
 	});
 
 	$(".addSubTask").on('click', function(){
@@ -60,7 +60,7 @@ $(function(){
 		date.val('');
 		time.val('');
 		starDefault();
-		makeSortable()
+		
 	});
 	
 	$(".taskTitle").keyup(function(){
@@ -103,7 +103,7 @@ $(function(){
 
 	function makeTask (task){
 		console.log('makeTask called')
-		var i = tasks.length;
+		var i = tasks.indexOf(task);
 		var ac_group = $(document.createElement('div'))
 					.addClass('accordion-group')
 					.attr('id', task._id)
@@ -196,7 +196,7 @@ $(function(){
 		});
 
 		//$('.hasTooltip').tooltip();
-
+		makeSortable()
 		return task;
 
 	}
