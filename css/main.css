@@ -34,7 +34,7 @@ body {
 }
 .topBarDivider{
 	margin-bottom:50px;
-	margin-top:30px;
+	margin-top:40px;
 }
 .disInline{
 	display:inline;
@@ -55,9 +55,54 @@ body {
 .duedate{
 	margin-top: 10px;
 }
-
-
-
+.starSize{
+	font-size: 1.3em;
+	margin-left: 0px;
+}
+.starPadding{
+	padding-left:5px;
+	text-align: left;
+}
+.starStyle{
+	margin-top: 3px !important;
+	margin-right: 15px !important;
+	text-decoration: none !important;
+}
+.menuStarStyle{
+	margin-top: 3px !important;
+	margin-left: 5px !important;
+}
+.itemText{
+	text-decoration: none !important;
+}
+.checkStyle{
+	margin-top: 3px !important;
+	margin-right: 10px !important;
+	text-decoration: none !important;
+}
+.checkedStyle{
+	margin-top: 3px !important;
+	margin-right: 9px !important;
+	text-decoration: none !important;
+}
+.sepLine{
+	background-color: #e5e5e5;
+	height: 36px;
+	width: 1px;
+	margin-top: -8px;
+	margin-right: 20px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	 -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+				box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.trash{
+	margin-top: 30px;
+	font-size: 2em;
+}
+.calendar{
+	font-size: 2em;
+	margin-right: 40px;
+}
 
 
 
