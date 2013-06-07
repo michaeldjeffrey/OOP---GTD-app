@@ -109,7 +109,6 @@ $(function(){
 		.attr('id', task._id)
 		var ac_heading = $(document.createElement('div'))
 		.addClass('accordion-heading text-left')
-					// .prepend("<input type='checkbox' class='status'>")
 					if(task.status == "completed"){
 						console.log("adding completed class")
 						ac_heading.addClass("completed");
@@ -124,17 +123,19 @@ $(function(){
 					.addClass('pull-right')
 					.text('Due ' + task.due_date);
 
-					var ac_check = $(document.createElement('i'))
-					.addClass("icon-check-empty checkStyle pull-left") // hasTooltip")
-.attr('id', 'check' + i);
-					//.attr('data-toggle', 'tooltip')
-					//.attr('title', 'click to select');
+		var ac_check = $(document.createElement('i'))
+					.attr('id', 'check' + i);
+					if(task.status == 'completed'){
+						var setCheck = 'icon-check-sign checkedStyle'
+						ac_check.addClass("icon-check-sign checkedStyle pull-left")
+					} else {
+						var setCheck = 'icon-check-empty checkStyle'
+						ac_check.addClass("icon-check-empty checkStyle pull-left");
+					}
 					checkPriorityNum();
-		var ac_priority = $(document.createElement('i'))  //make this: <i class="icon-star-empty"></i>
-					.addClass(setStar + " starStyle pull-left")// hasTooltip")
-.attr('id', 'itemStar' + i);
-					//.attr('data-toggle', 'tooltip')
-					//.attr('title', 'click to change importance');
+		var ac_priority = $(document.createElement('i')) 
+					.addClass(setStar + " starStyle pull-left")
+					.attr('id', 'itemStar' + i);
 					var ac_line = $(document.createElement('div'))
 					.addClass("sepLine pull-left");
 					var collapse = $(document.createElement('div'))
@@ -161,7 +162,7 @@ $(function(){
 					ac_toggle.append(ac_check).append(ac_priority).append(ac_line).append(ac_due);
 					ac_heading.append(ac_toggle);
 					ac_group.append(ac_heading)
-					
+
 					if(hasDescription === true || hasSubtasks === true){
 						ac_group.append(collapse);
 						console.log('appending collapse')
@@ -169,20 +170,6 @@ $(function(){
 
 					$(".accordion").append(ac_group);
 
-					$("#"+task._id).find(".status").on('change', function(){
-						var comp = $(this).parent().parent().prop('id');
-						var status;
-						if($(this).prop('checked') == true){
-							$(this).parent().addClass('completed');
-							status = 'completed';
-						} else {
-							$(this).parent().removeClass('completed');
-							status = "incomplete";
-						}
-						for (var i = 1; i < tasks.length; i++) {
-							if(comp == tasks[i]._id) tasks[i].status = status
-						}
-				})
 					$("#itemStar" + i).on('click', function(e){
 						e.stopPropagation();
 						priorityNum++
@@ -193,14 +180,24 @@ $(function(){
 			$(this).removeClass().addClass(setStar + ' starStyle pull-left'); // hasTooltip');
 				});
 
-					var setCheck = "icon-check-empty checkStyle";
 					$("#check" + i).on('click', function(e){
 						e.stopPropagation();
+						var comp = $(this).parent().parent().parent().prop('id');
+						var status;
 						if(setCheck === "icon-check-empty checkStyle"){
+							status = 'completed';
 							setCheck = "icon-check-sign checkedStyle"
 						}else{
+							status = 'incomplete';
 							setCheck = "icon-check-empty checkStyle"
 						}
+						for (var i = 1; i < tasks.length; i++) {
+							if(comp == tasks[i]._id){
+								tasks[i].status = status;
+								saveTask_localStorage(tasks[i])
+							} 
+						}
+						console.log(tasks)
 			$(this).removeClass().addClass(setCheck + ' pull-left'); // hasTooltip');
 				});
 
