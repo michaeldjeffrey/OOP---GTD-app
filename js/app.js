@@ -17,7 +17,7 @@ $(function(){
 	$('#addBtn').on('click', function(e){
 		e.preventDefault();
 		var value = $('#addText').val();	
-		var task = new Task({text: value, priority: 0})
+		var task = new Task({text: value, priority: 0, sort_order: tasks.length})
 		tasks.push(makeTask(task));
 		saveTask_localStorage(task)
 		$('.taskTitle').val('');
@@ -48,6 +48,7 @@ $(function(){
 			due_date: dueFromNow,
 			subtasks: subtasks,
 			priority: priority,
+			sort_order: tasks.length
 			// repeat: repeat,
 		});
 		tasks.push(makeTask(task));
