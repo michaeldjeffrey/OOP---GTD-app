@@ -1,6 +1,6 @@
 // JSON stringify to store in local storage
 // JSON parse to read from local storage
-	var tasks = retrieve_localStorage()
+var tasks = retrieve_localStorage()
 $(function(){
 	//fill tags array when tasks are recieved from local storage
 	var tagsArray = [];
@@ -9,7 +9,7 @@ $(function(){
 	$('.hasTooltip').tooltip();
 
 	function makeSortable(){
-		if(tasks.length === 2){
+		if(tasks.length > 2){
 			$( ".accordion" ).sortable().disableSelection();
 		}
 	}
@@ -52,7 +52,6 @@ $(function(){
 		});
 		tasks.push(makeTask(task));
 		saveTask_localStorage(task)
-		console.log(task);
 		$("#myModal").modal('hide');
 		title.val('');
 		description.val('');
@@ -102,98 +101,108 @@ $(function(){
 
 
 	function makeTask (task){
-		console.log('makeTask called')
+		var hasDescription = false;
+		var hasSubtasks = false;
 		var i = tasks.indexOf(task);
 		var ac_group = $(document.createElement('div'))
-					.addClass('accordion-group')
-					.attr('id', task._id)
+		.addClass('accordion-group')
+		.attr('id', task._id)
 		var ac_heading = $(document.createElement('div'))
-					.addClass('accordion-heading text-left')
-					.prepend("<input type='checkbox' class='status'>")
+		.addClass('accordion-heading text-left')
+					// .prepend("<input type='checkbox' class='status'>")
 					if(task.status == "completed"){
 						console.log("adding completed class")
 						ac_heading.addClass("completed");
 					}
-		var ac_toggle = $(document.createElement('a'))
+					var ac_toggle = $(document.createElement('a'))
 					.addClass('accordion-toggle itemText')
 					.attr('data-toggle', 'collapse')
 					.attr('data-parent', '#accordion2')
 					.attr('href','#collapse'+i) // Specific to each accordion instance
 					.text(task.text)
-		var ac_due = $(document.createElement('span'))
+					var ac_due = $(document.createElement('span'))
 					.addClass('pull-right')
 					.text('Due ' + task.due_date);
 
-		var ac_check = $(document.createElement('i'))
+					var ac_check = $(document.createElement('i'))
 					.addClass("icon-check-empty checkStyle pull-left") // hasTooltip")
-					.attr('id', 'check' + i);
+.attr('id', 'check' + i);
 					//.attr('data-toggle', 'tooltip')
 					//.attr('title', 'click to select');
 					checkPriorityNum();
 		var ac_priority = $(document.createElement('i'))  //make this: <i class="icon-star-empty"></i>
 					.addClass(setStar + " starStyle pull-left")// hasTooltip")
-					.attr('id', 'itemStar' + i);
+.attr('id', 'itemStar' + i);
 					//.attr('data-toggle', 'tooltip')
 					//.attr('title', 'click to change importance');
-		var ac_line = $(document.createElement('div'))
+					var ac_line = $(document.createElement('div'))
 					.addClass("sepLine pull-left");
-		var collapse = $(document.createElement('div'))
+					var collapse = $(document.createElement('div'))
 					.addClass('accordion-body collapse')
 					.attr('id', 'collapse' + i); // Specific to each accordion instance
-		var ac_inner = $(document.createElement('div'))
+					var ac_inner = $(document.createElement('div'))
 					.addClass('accordion-inner');
-		var p1 = $(document.createElement('p'))
+					var p1 = $(document.createElement('p'))
 					.text(task.description);
+					var stasks = $(document.createElement('div'))
+					for (var sub = 0; sub < task.subtasks.length; sub++) {
+						stasks.append("<div class='alert alert-info'>"+task.subtasks[sub].text+"</div>")
+					}
+					if(task.description !== null){
+						hasDescription = true;
+						ac_inner.append(p1);
+					}
+					collapse.append(ac_inner);
+					if(task.subtasks.length > 0){
+						hasSubtasks = true;
+						collapse.append(stasks)
+					}
 
-		ac_inner.append(p1);
-		collapse.append(ac_inner);
+					ac_toggle.append(ac_check).append(ac_priority).append(ac_line).append(ac_due);
+					ac_heading.append(ac_toggle);
+					ac_group.append(ac_heading)
+					
+					if(hasDescription === true || hasSubtasks === true){
+						ac_group.append(collapse);
+						console.log('appending collapse')
+					}
 
-		ac_toggle.append(ac_check).append(ac_priority).append(ac_line).append(ac_due);
-		ac_heading.append(ac_toggle);
-		ac_group.append(ac_heading)//.append(collapse);
-		if(task.description !== null || task.subtasks !== null){
-			ac_group.append(collapse);
-			for (var sub = 0; sub < task.subtasks.length; sub++) {
-				collapse.append("<div class='alert alert-info'>"+task.subtasks[sub].text+"</div>")
-			}
-			
-		}
-		$(".accordion").append(ac_group);
+					$(".accordion").append(ac_group);
 
-	$("#"+task._id).find(".status").on('change', function(){
-		var comp = $(this).parent().parent().prop('id');
-		var status;
-		if($(this).prop('checked') == true){
-			$(this).parent().addClass('completed');
-			status = 'completed';
-		} else {
-			$(this).parent().removeClass('completed');
-			status = "incomplete";
-		}
-		for (var i = 1; i < tasks.length; i++) {
-				if(comp == tasks[i]._id) tasks[i].status = status
-		}
-	})
-		$("#itemStar" + i).on('click', function(e){
-			e.stopPropagation();
-			priorityNum++
-			if(priorityNum === 3){
-				priorityNum = 0;
-			}
-			checkPriorityNum()
+					$("#"+task._id).find(".status").on('change', function(){
+						var comp = $(this).parent().parent().prop('id');
+						var status;
+						if($(this).prop('checked') == true){
+							$(this).parent().addClass('completed');
+							status = 'completed';
+						} else {
+							$(this).parent().removeClass('completed');
+							status = "incomplete";
+						}
+						for (var i = 1; i < tasks.length; i++) {
+							if(comp == tasks[i]._id) tasks[i].status = status
+						}
+				})
+					$("#itemStar" + i).on('click', function(e){
+						e.stopPropagation();
+						priorityNum++
+						if(priorityNum === 3){
+							priorityNum = 0;
+						}
+						checkPriorityNum()
 			$(this).removeClass().addClass(setStar + ' starStyle pull-left'); // hasTooltip');
-		});
+				});
 
-		var setCheck = "icon-check-empty checkStyle";
-		$("#check" + i).on('click', function(e){
-			e.stopPropagation();
-			if(setCheck === "icon-check-empty checkStyle"){
-				setCheck = "icon-check-sign checkedStyle"
-			}else{
-				setCheck = "icon-check-empty checkStyle"
-			}
+					var setCheck = "icon-check-empty checkStyle";
+					$("#check" + i).on('click', function(e){
+						e.stopPropagation();
+						if(setCheck === "icon-check-empty checkStyle"){
+							setCheck = "icon-check-sign checkedStyle"
+						}else{
+							setCheck = "icon-check-empty checkStyle"
+						}
 			$(this).removeClass().addClass(setCheck + ' pull-left'); // hasTooltip');
-		});
+				});
 
 		//$('.hasTooltip').tooltip();
 		makeSortable()
@@ -202,8 +211,8 @@ $(function(){
 	}
 
 	$("#optionsTags").select2({
-	  tags:tagsArray,
-	  tokenSeparators: [",", " "]
+		tags:tagsArray,
+		tokenSeparators: [",", " "]
 	}).on("select2-selecting", function(e) { 
 		tagsArray.push(e.val);
 	});
@@ -213,7 +222,6 @@ $(function(){
 
 
 	for (var i = 1; i < tasks.length; i++) {
-		console.log("making task", i)
 		makeTask(tasks[i]);
 	}
 
