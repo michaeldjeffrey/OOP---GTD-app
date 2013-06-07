@@ -110,7 +110,6 @@ $(function(){
 		var ac_heading = $(document.createElement('div'))
 		.addClass('accordion-heading text-left')
 					if(task.status == "completed"){
-						console.log("adding completed class")
 						ac_heading.addClass("completed");
 					}
 					var ac_toggle = $(document.createElement('a'))
@@ -165,7 +164,6 @@ $(function(){
 
 					if(hasDescription === true || hasSubtasks === true){
 						ac_group.append(collapse);
-						console.log('appending collapse')
 					}
 
 					$(".accordion").append(ac_group);
@@ -187,9 +185,11 @@ $(function(){
 						if(setCheck === "icon-check-empty checkStyle"){
 							status = 'completed';
 							setCheck = "icon-check-sign checkedStyle"
+							$(this).parent().parent().addClass('completed')
 						}else{
 							status = 'incomplete';
 							setCheck = "icon-check-empty checkStyle"
+							$(this).parent().parent().removeClass('completed')
 						}
 						for (var i = 1; i < tasks.length; i++) {
 							if(comp == tasks[i]._id){
@@ -197,7 +197,6 @@ $(function(){
 								saveTask_localStorage(tasks[i])
 							} 
 						}
-						console.log(tasks)
 			$(this).removeClass().addClass(setCheck + ' pull-left'); // hasTooltip');
 				});
 

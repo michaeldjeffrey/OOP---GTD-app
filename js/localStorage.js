@@ -10,3 +10,6 @@ function retrieve_localStorage(){
   // console.log('from retrieve localStorage',a);
   return a;
 }
+function removeFrom_localStorage(task){
+  localStorage.setItem(task._id, null)
+}
