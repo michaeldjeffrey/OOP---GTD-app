@@ -11,5 +11,7 @@ function retrieve_localStorage(){
   return a;
 }
 function removeFrom_localStorage(task){
-  localStorage.setItem(task._id, null)
+	if(task !== null || task !== undefined){
+ 	 localStorage.removeItem(task._id);
+ 	}
 }
