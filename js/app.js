@@ -89,8 +89,6 @@ $(function(){
 		$(".taskTitle").val($(this).val());
 	});
 
-
-
 	$("#appendedInputButton")
 		.autocomplete({
 			source: autoCompleteTags,
@@ -100,11 +98,32 @@ $(function(){
 			$(this).autocomplete('search');
 		});
 
-	console.log('added the autcomplete')
-	$("#appendedInputButton").on('keydown', function(){
 
+	$("#appendedInputButton").on('keyup', function(){
+		var val = $(this).val()
+		if(val == ''){
+			removeFade()
+		} else {
+			console.log('input is not empty')
+			var filt = $.grep(tasks, function(n,i){
+				if(n.tags.length !== 0){
+					for (var t = 0; t < n.tags.length; t++) {
+						if(n.tags[t].indexOf(val) == 0){
+							return n;
+						}
+					}
+				}
+			})
+			removeFade()
+			filt.forEach(function(n, i){
+				$("#"+n._id).removeClass('fade')
+			})
+		}
 	})
 
+	function removeFade(){
+		$(".fade").removeClass('fade')
+	}
 
 	var priorityNum = 0;
 
