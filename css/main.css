@@ -103,6 +103,20 @@ body {
 	font-size: 2em;
 	margin-right: 40px;
 }
+#trash {
+	width:60%;
+	height: 50px;
+	margin-left: -20%;
+	padding-left: 20%;
+	-webkit-transition: text-shadow linear 0.2s;
+	-moz-transition: text-shadow linear 0.2s;
+	-ms-transition: text-shadow linear 0.2s;
+	-o-transition: text-shadow linear 0.2s;
+	transition: text-shadow linear 0.2s;
+}
+#trash.active {
+	text-shadow: 0 0 2px rgba(0, 136, 204, 1);
+}
 
 
 
@@ -166,7 +180,7 @@ z-index: 4000;
 
 /* Accordion styling */
 .accordion-heading 
-.accordion-toggle:hover{
+.accordion-hover:hover{
 	background: #eee;
 	text-decoration: none;
 }
@@ -189,7 +203,7 @@ z-index: 4000;
 	margin: 10px 0px 0px -20px !important;
 }
 .completed .accordion-toggle{
-	text-decoration: line-through;
+	text-decoration: line-through !important;
 	color: #999 !important;
 }
 
