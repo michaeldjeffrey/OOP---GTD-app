@@ -34,7 +34,7 @@ body {
 }
 .topBarDivider{
 	margin-bottom:50px;
-	margin-top:30px;
+	margin-top:40px;
 }
 .disInline{
 	display:inline;
@@ -48,3 +48,162 @@ body {
 .day{
 	margin-left:5px;
 }
+.whitebg{
+	background: #fff !important;
+	text-align: left !important;
+}
+.duedate{
+	margin-top: 10px;
+}
+.starSize{
+	font-size: 1.3em;
+	margin-left: 0px;
+}
+.starPadding{
+	padding-left:5px;
+	text-align: left;
+}
+.starStyle{
+	margin-top: 3px !important;
+	margin-right: 15px !important;
+	text-decoration: none !important;
+}
+.menuStarStyle{
+	margin-top: 3px !important;
+	margin-left: 5px !important;
+}
+.itemText{
+	text-decoration: none !important;
+}
+.checkStyle{
+	margin-top: 3px !important;
+	margin-right: 10px !important;
+	text-decoration: none !important;
+}
+.checkedStyle{
+	margin-top: 3px !important;
+	margin-right: 9px !important;
+	text-decoration: none !important;
+}
+.sepLine{
+	background-color: #e5e5e5;
+	height: 36px;
+	width: 1px;
+	margin-top: -8px;
+	margin-right: 20px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	 -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+				box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.trash{
+	margin-top: 30px;
+	font-size: 2em;
+}
+.calendar{
+	font-size: 2em;
+	margin-right: 40px;
+}
+#trash {
+	width:60%;
+	height: 50px;
+	margin-left: -20%;
+	padding-left: 20%;
+	-webkit-transition: text-shadow linear 0.2s;
+	-moz-transition: text-shadow linear 0.2s;
+	-ms-transition: text-shadow linear 0.2s;
+	-o-transition: text-shadow linear 0.2s;
+	transition: text-shadow linear 0.2s;
+}
+#trash.active {
+	text-shadow: 0 0 2px rgba(0, 136, 204, 1);
+}
+
+
+
+
+
+/* clock pick css */
+#CP_hourcont {
+padding: 0px;
+position:absolute;
+border:1px dashed #bbbbbb;
+background-color:#dddddd;
+display:none;
+z-index: 4000;
+}
+
+#CP_minutecont {
+background-color:#dddddd;
+padding: 0px;
+position:absolute;
+width:45px;
+border: 1px dashed #cccccc;
+display:none;
+z-index: 4000;
+}
+
+.floatleft {
+float:left;
+z-index: 4000;
+}
+
+.CP_hour {
+padding:1px;
+font-family: Arial, Helvetica, sans-serif;
+font-size:9px;
+white-space:nowrap;
+cursor:pointer;
+width:35px;
+margin:1px;
+background-color:#eeeeee;
+z-index: 4000;
+}
+
+.CP_minute {
+padding:1px;
+background-color:#eeeeee;
+font-family: Arial, Helvetica, sans-serif;
+font-size:9px;
+white-space:nowrap;
+cursor:pointer;
+width:auto;
+margin:1px;
+z-index: 4000;
+}
+
+.CP_over {
+background-color:#ffffff;
+z-index: 4000;
+}
+
+
+
+/* Accordion styling */
+.accordion-heading 
+.accordion-hover:hover{
+	background: #eee;
+	text-decoration: none;
+}
+
+
+
+
+.addSubTask{
+	color: rgb(50, 150, 50);
+	font-size: 24px;
+	margin-left: 5px;
+}
+.addSubTask:hover{
+	color: rgb(30, 130, 30);
+}
+.addSubTask:active{
+	color: rgb(20, 120, 20);
+}
+.status{
+	margin: 10px 0px 0px -20px !important;
+}
+.completed .accordion-toggle{
+	text-decoration: line-through !important;
+	color: #999 !important;
+}
+
