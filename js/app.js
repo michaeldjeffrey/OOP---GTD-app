@@ -247,7 +247,6 @@ $(function(){
 							checkPriorityNum()
 				$(this).removeClass().addClass(setStar + ' starStyle pull-left'); // hasTooltip');
 					});
-
 						$("#check" + i).on('click', function(e){
 							e.stopPropagation();
 							var comp = $(this).parent().parent().parent().prop('id');
@@ -261,7 +260,8 @@ $(function(){
 								setCheck = "icon-check-empty checkStyle"
 								$(this).parent().parent().removeClass('completed')
 							}
-							for (var i = 1; i < tasks.length; i++) {
+							for (var i = 0; i < tasks.length; i++) {
+								console.log('task ids from creation', tasks[i]._id)
 								if(comp == tasks[i]._id){
 									tasks[i].status = status;
 									saveTask_localStorage(tasks[i])
