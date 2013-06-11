@@ -4,7 +4,17 @@ var tasks = retrieve_localStorage();
 $(function(){
 	//fill tags array when tasks are recieved from local storage
 	var tagsArray = [];
-	
+	var autoCompleteTags = [];
+	for (var i = 0; i < tasks.length; i++) {
+		makeTask(tasks[i]);
+		if(tasks[i].tags.length !== 0){
+			for (var t = 0; t < tasks[i].tags.length; t++) {
+				autoCompleteTags.push(tasks[i].tags[t])
+			}
+		}
+	}
+
+
 
 	$('.hasTooltip').tooltip();
 
@@ -28,12 +38,11 @@ $(function(){
   });
 	$('#addBtn').on('click', function(e){
 		e.preventDefault();
-		var value = $('#addText').val();	
+		var value = $('#addText').val();
 		var task = new Task({text: value, priority: 0, sort_order: tasks.length})
 		tasks.push(makeTask(task));
 		saveTask_localStorage(task)
 		$('.taskTitle').val('');
-		
 	});
 
 	$(".addSubTask").on('click', function(){
@@ -56,7 +65,7 @@ $(function(){
 		var task = new Task({
 			text: title.val(),
 			description: description.val(),
-			tags: tags.val(),
+			tags: tagsArray,
 			due_date: dueFromNow,
 			subtasks: subtasks,
 			priority: priority,
@@ -72,14 +81,50 @@ $(function(){
 		date.val('');
 		time.val('');
 		starDefault();
-		
+		// tagsArray = [];
+
 	});
-	
+
 	$(".taskTitle").keyup(function(){
 		$(".taskTitle").val($(this).val());
 	});
 
-	
+	$("#appendedInputButton")
+		.autocomplete({
+			source: autoCompleteTags,
+			minLength: 0
+		})
+		.bind('focus', function(){
+			$(this).autocomplete('search');
+		});
+
+
+	$("#appendedInputButton").on('keyup', function(){
+		var val = $(this).val()
+		if(val == ''){
+			removeFade()
+		} else {
+			console.log('input is not empty')
+			var filt = $.grep(tasks, function(n,i){
+				if(n.tags.length !== 0){
+					for (var t = 0; t < n.tags.length; t++) {
+						if(n.tags[t].indexOf(val) == 0){
+							return n;
+						}
+					}
+				}
+			})
+			removeFade()
+			filt.forEach(function(n, i){
+				$("#"+n._id).removeClass('fade')
+			})
+		}
+	})
+
+	function removeFade(){
+		$(".fade").removeClass('fade')
+	}
+
 	var priorityNum = 0;
 
 	function checkPriorityNum(){
@@ -148,7 +193,7 @@ $(function(){
 							ac_check.addClass("icon-check-empty checkStyle pull-left");
 						}
 						checkPriorityNum();
-			var ac_priority = $(document.createElement('i')) 
+			var ac_priority = $(document.createElement('i'))
 						.addClass(setStar + " starStyle pull-left")
 						.attr('id', 'itemStar' + i);
 						var ac_line = $(document.createElement('div'))
@@ -212,7 +257,7 @@ $(function(){
 								if(comp == tasks[i]._id){
 									tasks[i].status = status;
 									saveTask_localStorage(tasks[i])
-								} 
+								}
 							}
 				$(this).removeClass().addClass(setCheck + ' pull-left'); // hasTooltip');
 					});
@@ -226,14 +271,12 @@ $(function(){
 	$("#optionsTags").select2({
 		tags:tagsArray,
 		tokenSeparators: [",", " "]
-	}).on("select2-selecting", function(e) { 
+	}).on("select2-selecting", function(e) {
 		tagsArray.push(e.val);
 	});
 	$("#clockpick").clockpick();
 	$("#datepicker").datepicker();
 
-	for (var i = 1; i < tasks.length; i++) {
-		makeTask(tasks[i]);
-	}
+
 
 });

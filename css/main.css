@@ -1,4 +1,4 @@
-@charset "UTF-8";      
+@charset "UTF-8";
 body {
 	padding-top: 40px;
 	padding-bottom: 40px;
@@ -23,10 +23,10 @@ body {
 	margin-top:80px;
 }
 .unselectable{
-	-webkit-user-select: none; 
-	-khtml-user-select: none; 
-	-moz-user-select: none; 
-	-o-user-select: none; 
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
 	user-select: none;
 }
 .icon{
@@ -179,7 +179,7 @@ z-index: 4000;
 
 
 /* Accordion styling */
-.accordion-heading 
+.accordion-heading
 .accordion-hover:hover{
 	background: #eee;
 	text-decoration: none;
@@ -207,3 +207,9 @@ z-index: 4000;
 	color: #999 !important;
 }
 
+ul, li{
+	list-style: none;
+}
+.fade{
+	opacity: .3;
+}

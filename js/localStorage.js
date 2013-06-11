@@ -4,10 +4,10 @@ function saveTask_localStorage (task) {
 
 function retrieve_localStorage(){
 	var a = [];
-	for ( var i = 0; i < localStorage.length+1; i++){
+	for ( var i = 0; i < localStorage.length; i++){
 		a.push(JSON.parse(localStorage.getItem(i)));
   }
-  // console.log('from retrieve localStorage',a);
+  console.log('from retrieve localStorage',a);
   return a;
 }
 function removeFrom_localStorage(task){
