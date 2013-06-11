@@ -89,14 +89,17 @@ $(function(){
 		$(".taskTitle").val($(this).val());
 	});
 
+
+
 	$("#appendedInputButton")
-		.autocomplete( { source: autoCompleteTags })
-		.focus(function(){
-			console.log('focusing on the input', $(this).val())
-			if($(this).val() == ''){
-				$(this).trigger('keydown.autocomplete');
-			}
+		.autocomplete({
+			source: autoCompleteTags,
+			minLength: 0
+		})
+		.bind('focus', function(){
+			$(this).autocomplete('search');
 		});
+
 	console.log('added the autcomplete')
 	$("#appendedInputButton").on('keydown', function(){
 
