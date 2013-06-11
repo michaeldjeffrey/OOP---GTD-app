@@ -104,7 +104,6 @@ $(function(){
 		if(val == ''){
 			removeFade()
 		} else {
-			console.log('input is not empty')
 			var filt = $.grep(tasks, function(n,i){
 				if(n.tags.length !== 0){
 					for (var t = 0; t < n.tags.length; t++) {
@@ -162,6 +161,7 @@ $(function(){
 		if(task !== null){
 			var hasDescription = false;
 			var hasSubtasks = false;
+			var hasTags = false;
 			var i = task._id;
 			var ac_group = $(document.createElement('div'))
 			.addClass('accordion-group')
@@ -209,6 +209,10 @@ $(function(){
 						for (var sub = 0; sub < task.subtasks.length; sub++) {
 							stasks.append("<div class='alert alert-info'>"+task.subtasks[sub].text+"</div>")
 						}
+						var tagsList = $(document.createElement('ul'))
+						for(var tag = 0; tag < task.tags.length; tag++){
+							tagsList.append("<li>"+task.tags[tag]+"</li>")
+						}
 						if(task.description !== null){
 							hasDescription = true;
 							ac_inner.append(p1);
@@ -218,12 +222,16 @@ $(function(){
 							hasSubtasks = true;
 							collapse.append(stasks)
 						}
+						if(task.tags.length > 0){
+							hasTags = true;
+							collapse.append(tagsList)
+						}
 
 						ac_toggle.append(ac_check).append(ac_priority).append(ac_line).append(ac_due);
 						ac_heading.append(ac_toggle);
 						ac_group.append(ac_heading)
 
-						if(hasDescription === true || hasSubtasks === true){
+						if(hasDescription === true || hasSubtasks === true || hasTags === true){
 							ac_group.append(collapse);
 							ac_toggle.addClass('accordion-hover');
 						}
