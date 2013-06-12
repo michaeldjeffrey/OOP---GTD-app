@@ -1,94 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>GTD Todo App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="css/chosen.css" rel="stylesheet">
-    <link href="ui-lightness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' href='css/main.css'/>
-    <link href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
-  </head>
-  <body>
-    <div class="formAddNew container">
-    	<div class="text-right">
-        <div class="input-append pull-right">
-          <input placeholder="tags..." type="text" id="appendedInputButton" class="input-medium">
-          <p type="button" class="btn">Search</p>
-        </div>
-        <p data-toggle="tooltip" title="Show all" class="icon btn pull-right hasTooltip">All</p>
-        <i data-toggle="tooltip" title="Sort by calendar day" class="icon-calendar pull-right calendar hasTooltip"></i>
-        <p data-toggle="tooltip" title="Sort by today" class="icon btn pull-right hasTooltip">Today</p>
-        <div id="trash">
-          <i data-toggle="tooltip" title="Drag items here to remove" class="icon-trash pull-left trash hasTooltip"></i>
-      </div>
-      <br>
-      <hr class="topBarDivider">
-      <div class="text-center">
-        <div class="input-append">
-          <input type="text" id="addText" class="span5 input-large taskTitle" placeholder="new item">
-          <button id="addBtn" class="unselectable btn btn-medium btn-primary">Add</button>
-          <a href="#myModal" role="button" class="unselectable btn btn-medium btn-primary" data-toggle="modal">Options</a>
-        </div>
-        <div class="accordion" id="accordion2">
-        </div>
-      </div>
-    </div>
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Add Item Options</h3>
-      </div>
-      <div class="modal-body">
-        <form>
-          <input type="text" id="optionsText" class="span5 input-large taskTitle" placeholder="new item">
-          <textarea class="span5" rows="5" placeholder="description..." id='optionsDescription'></textarea>
-          <input type="text" class="span5 input-large" placeholder="Tags..." id='optionsTags'>
-          <div class="input-prepend input-append duedate">
-            <span class="add-on">Due</span>
-            <input class="input-small" type='text' id='datepicker' placeholder='date'>
-            <input class="input-small add-on whitebg" type='text' id='clockpick' placeholder='time'>
-          </div>
-          <div data-toggle="tooltip" title="Click to change importance" class="btn unselectable hasTooltip starPadding" id="setStar">
-            <i  id="star" class="icon-star-empty menuStarStyle"></i>
-            <span id="starText">Not important</span>
-          </div>
-          <br>
-          <div class="disInline dropdown">
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Repeat</a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-              <li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Sunday</p></a></li>
-              <li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Monday</p></a></li>
-              <li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Tuesday</p></a></li>
-              <li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Wednesday</p></a></li>
-              <li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Thursday</p></a></li>
-              <li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Friday</p></a></li>
-              <li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Saturday</p></a></li>
-            </ul>
-          </div>
-      <div class='subtasksInputs'>
-        <input class='input-large' type='text' name='subTaskTitle' placeholder='subtask title'>
-        <i class="icon-plus-sign addSubTask"></i>
-      </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button class="unselectable btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button id='optionsAdd' class="unselectable btn btn-primary">Add</button>
-      </div>
-    </div>
+	<head>
+		<meta charset="utf-8">
+		<title>GTD Todo App</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="css/chosen.css" rel="stylesheet">
+		<link href="ui-lightness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+		<link rel='stylesheet' type='text/css' href='css/main.css'/>
+		<link href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div class="formAddNew container">
+			<div class="text-right">
+				<div class="input-append pull-right">
+					<input placeholder="tags..." type="text" id="appendedInputButton" class="input-medium">
+					<p type="button" class="btn">Search</p>
+				</div>
+				<p data-toggle="tooltip" title="Show all" class="icon btn pull-right hasTooltip">All</p>
+				<i data-toggle="tooltip" title="Sort by calendar day" class="icon-calendar pull-right calendar hasTooltip"></i>
+				<p data-toggle="tooltip" title="Sort by today" class="icon btn pull-right hasTooltip">Today</p>
+				<div id="trash">
+					<i data-toggle="tooltip" title="Drag items here to remove" class="icon-trash pull-left trash hasTooltip"></i>
+			</div>
+			<br>
+			<hr class="topBarDivider">
+			<div class="text-center">
+				<div class="input-append">
+					<input type="text" id="addText" class="span5 input-large taskTitle" placeholder="new item">
+					<button id="addBtn" class="unselectable btn btn-medium btn-primary">Add</button>
+					<a href="#myModal" role="button" class="unselectable btn btn-medium btn-primary" data-toggle="modal">Options</a>
+				</div>
+				<div class="accordion" id="accordion2">
+				</div>
+			</div>
+		</div>
+		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">Add Item Options</h3>
+			</div>
+			<div class="modal-body">
+				<form>
+					<input type="text" id="optionsText" class="span5 input-large taskTitle" placeholder="new item">
+					<textarea class="span5" rows="5" placeholder="description..." id='optionsDescription'></textarea>
+					<input type="text" class="span5 input-large" placeholder="Tags..." id='optionsTags'>
+					<div class="input-prepend input-append duedate">
+						<span class="add-on">Due</span>
+						<input class="input-small" type='text' id='datepicker' placeholder='date'>
+						<input class="input-small add-on whitebg" type='text' id='clockpick' placeholder='time'>
+					</div>
+					<div data-toggle="tooltip" title="Click to change importance" class="btn unselectable hasTooltip starPadding" id="setStar">
+						<i  id="star" class="icon-star-empty menuStarStyle"></i>
+						<span id="starText">Not important</span>
+					</div>
+					<br>
+					<div class="disInline dropdown">
+						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Repeat</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+							<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Sunday</p></a></li>
+							<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Monday</p></a></li>
+							<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Tuesday</p></a></li>
+							<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Wednesday</p></a></li>
+							<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Thursday</p></a></li>
+							<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Friday</p></a></li>
+							<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Saturday</p></a></li>
+						</ul>
+					</div>
+			<div class='subtasksInputs'>
+				<input class='input-large' type='text' name='subTaskTitle' placeholder='subtask title'>
+				<i class="icon-plus-sign addSubTask"></i>
+			</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="unselectable btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				<button id='optionsAdd' class="unselectable btn btn-primary">Add</button>
+			</div>
+		</div>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.0/select2.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/clockpick.js"></script>
-    <script type="text/javascript" src="js/localStorage.js"></script>
-    <script type="text/javascript" src="js/TodoObject.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/moment.js"></script>
-  </body>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.0/select2.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/TodoObject.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/clockpick.js"></script>
+		<script type="text/javascript" src="js/localStorage.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/moment.js"></script>
+	</body>
 </html>

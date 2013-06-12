@@ -5,13 +5,19 @@ function saveTask_localStorage (task) {
 function retrieve_localStorage(){
 	var a = [];
 	for ( var i = 0; i < localStorage.length; i++){
-		a.push(JSON.parse(localStorage.getItem(i)));
+		a.push(new Task(JSON.parse(localStorage.getItem(i))));
   }
   console.log('from retrieve localStorage',a);
   return a;
 }
-function removeFrom_localStorage(task){
+function removeTask_localStorage(task){
 	if(task !== null || task !== undefined){
- 	 localStorage.removeItem(task._id);
+    var temp = retrieve_localStorage();
+    localStorage.clear()
+    temp.splice(task._id, 1);
+    temp.forEach(function(n,i){
+      n._id = i;
+      saveTask_localStorage(n);
+    })
  	}
 }

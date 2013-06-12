@@ -7,7 +7,7 @@ $(function(){
 	var autoCompleteTags = [];
 	for (var i = 0; i < tasks.length; i++) {
 		makeTask(tasks[i]);
-		if(tasks[i].tags.length !== 0){
+		if(typeof tasks[i].tags !== 'undefined'){
 			for (var t = 0; t < tasks[i].tags.length; t++) {
 				autoCompleteTags.push(tasks[i].tags[t])
 			}
@@ -33,7 +33,7 @@ $(function(){
       $('#' + itemId).remove();
       tasksIndex = itemId;
       var t = tasks[tasksIndex];
-      removeFrom_localStorage(t);
+      removeTask_localStorage(t);
     }
   });
 	$('#addBtn').on('click', function(e){
@@ -81,7 +81,7 @@ $(function(){
 		date.val('');
 		time.val('');
 		starDefault();
-		// tagsArray = [];
+		tagsArray = [];
 
 	});
 
@@ -206,23 +206,23 @@ $(function(){
 						var p1 = $(document.createElement('p'))
 						.text(task.description);
 						var stasks = $(document.createElement('div'))
-						for (var sub = 0; sub < task.subtasks.length; sub++) {
-							stasks.append("<div class='alert alert-info'>"+task.subtasks[sub].text+"</div>")
-						}
 						var tagsList = $(document.createElement('ul'))
-						for(var tag = 0; tag < task.tags.length; tag++){
-							tagsList.append("<li>"+task.tags[tag]+"</li>")
-						}
 						if(task.description !== null){
 							hasDescription = true;
 							ac_inner.append(p1);
 						}
 						collapse.append(ac_inner);
 						if(task.subtasks.length > 0){
+							for (var sub = 0; sub < task.subtasks.length; sub++) {
+								stasks.append("<div class='alert alert-info'>"+task.subtasks[sub].text+"</div>")
+							}
 							hasSubtasks = true;
 							collapse.append(stasks)
 						}
 						if(task.tags.length > 0){
+							for(var tag = 0; tag < task.tags.length; tag++){
+								tagsList.append("<li>"+task.tags[tag]+"</li>")
+							}
 							hasTags = true;
 							collapse.append(tagsList)
 						}

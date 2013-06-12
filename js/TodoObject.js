@@ -6,13 +6,12 @@ function Task (obj) {
 	this._id = localStorage.length; // init to number of tasks +1
 	this.status = obj.status || 'incomplete' // init to incomplete
 	this.text = obj.text || throwErr("need text to make a task") //throw "Text Required"
-	this.description = obj.description || null;//throwErr('need a description so you know what to do ') // init to description if provided
+	this.description = obj.description || null; //throwErr('need a description so you know what to do ') // init to description if provided
 	this.priority = obj.priority || 0 // init to low
 
 	this.tags = [];
 	if(obj.tags !== undefined){
 		this.add_tags(obj.tags)
-		console.log(this.tags)
 	}
 
 	this.subtasks = [];
