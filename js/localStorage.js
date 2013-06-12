@@ -10,8 +10,14 @@ function retrieve_localStorage(){
   console.log('from retrieve localStorage',a);
   return a;
 }
-function removeFrom_localStorage(task){
+function removeTask_localStorage(task){
 	if(task !== null || task !== undefined){
- 	 localStorage.removeItem(task._id);
+    var temp = retrieve_localStorage();
+    localStorage.clear()
+    temp.splice(task._id, 1);
+    temp.forEach(function(n,i){
+      n._id = i;
+      saveTask_localStorage(n);
+    })
  	}
 }
