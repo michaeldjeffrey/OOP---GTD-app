@@ -14,16 +14,37 @@ $(function(){
 		}
 	}
 
-
-
 	$('.hasTooltip').tooltip();
+
+	function reSort_remove(task){
+		for(i=1; i<tasks.length; i++){
+			if(tasks[i].sort_order > task.sort_order){
+				tasks[i].sort_order--;
+			}
+		}
+	}
+	function reSort(task){ // this is dumb as fuck and i cant figure it out, I suck!
+		var taskObj = tasks[task.attr('id')];
+		var nextTask = parseInt(task.next().attr('id'));
+		console.log(nextTask);
+		var tempId = nextTask;
+		for(var i = 0; i < tasks.length; i++){
+			if(tasks[i]._id >= nextTask){
+				tempId++;
+				tasks[i]._id = tempId;
+			}
+		}
+		taskObj._id = nextTask;
+	}
 
 	function makeSortable(){
 		$(".accordion").sortable({
-        stop:function(event,ui){
-        console.log('stop function invoked');
+      stop:function(event,ui){
+        var task = ui.item;
         makeSortable();
-    }}).disableSelection();
+        reSort(task);
+    	}
+  	}).disableSelection();
 	}
 	$("#trash").droppable({
     activeClass: 'active',
@@ -34,6 +55,7 @@ $(function(){
       tasksIndex = itemId;
       var t = tasks[tasksIndex];
       removeFrom_localStorage(t);
+      reSort_remove(t);
     }
   });
 	$('#addBtn').on('click', function(e){
@@ -61,7 +83,7 @@ $(function(){
 		$("[name='subTaskTitle']").each(function(i){
 			if($(this).val().trim() !== '') subtasks.push({text: $(this).val()})
 		})
-		var priority = 0;
+		var priority = $('#starText').data('num');
 		var task = new Task({
 			text: title.val(),
 			description: description.val(),
@@ -124,36 +146,54 @@ $(function(){
 		$(".fade").removeClass('fade')
 	}
 
-	var priorityNum = 0;
 
-	function checkPriorityNum(){
-		if(priorityNum === 0){
+	function setPriority(task, i){
+		task._priority++;
+		if(task._priority == 3){
+			task._priority = 0;
+		}
+		checkPriority(task);
+	}
+
+	function checkPriority(task){
+		if(task._priority == 0){
 			setStar = 'icon-star-empty';
-			starText = 'Not important';
-		}else if(priorityNum === 1){
+		}else if(task._priority == 1){
 			setStar = 'icon-star-half-empty';
-			starText = 'Important';
 		}else{
 			setStar = 'icon-star';
-			starText = 'Very important';
 		}
 	}
 
+	var priorityNum = 0;
 	$('#setStar').on('click', function(){
-		priorityNum++
-		if(priorityNum === 3){
+		priorityNum++;
+		if(priorityNum == 3){
 			priorityNum = 0;
 		}
-		checkPriorityNum()
+
+		if(priorityNum == 0){
+			setStar = 'icon-star-empty';
+			starText = 'Not Important';
+			$('#starText').attr('data-num', '0');
+		}else if(priorityNum == 1){
+			setStar = 'icon-star-half-empty';
+			starText = 'Important';
+			$('#starText').attr('data-num', '1');
+		}else{
+			setStar = 'icon-star';
+			starText = 'Very Important';
+			$('#starText').attr('data-num', '2');
+		}
+
 		$('#star').removeClass().addClass(setStar + ' menuStarStyle');
 		$('#starText').html(starText);
 	});
 
 	function starDefault(){
-		priorityNum = 0;
-		checkPriorityNum()
-		$('#star').removeClass().addClass(setStar + ' menuStarStyle');
-		$('#starText').html(starText);
+		$('#star').removeClass().addClass('icon-star-empty menuStarStyle');
+		$('#starText').html('Not Important');
+		$('#starText').attr('data-num', '0');;
 	}
 
 
@@ -192,7 +232,7 @@ $(function(){
 							var setCheck = 'icon-check-empty checkStyle'
 							ac_check.addClass("icon-check-empty checkStyle pull-left");
 						}
-						checkPriorityNum();
+						checkPriority(task);
 			var ac_priority = $(document.createElement('i'))
 						.addClass(setStar + " starStyle pull-left")
 						.attr('id', 'itemStar' + i);
@@ -240,13 +280,14 @@ $(function(){
 
 						$("#itemStar" + i).on('click', function(e){
 							e.stopPropagation();
-							priorityNum++
-							if(priorityNum === 3){
-								priorityNum = 0;
+							setPriority(task, i);
+							$(this).removeClass().addClass(setStar + ' starStyle pull-left');
+							for (var i = 0; i < tasks.length; i++) {
+								if(task._id == tasks[i]._id){
+									saveTask_localStorage(tasks[i])
+								}
 							}
-							checkPriorityNum()
-				$(this).removeClass().addClass(setStar + ' starStyle pull-left'); // hasTooltip');
-					});
+						});
 						$("#check" + i).on('click', function(e){
 							e.stopPropagation();
 							var comp = $(this).parent().parent().parent().prop('id');
@@ -284,7 +325,5 @@ $(function(){
 	});
 	$("#clockpick").clockpick();
 	$("#datepicker").datepicker();
-
-
 
 });
