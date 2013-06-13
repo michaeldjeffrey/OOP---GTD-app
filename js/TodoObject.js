@@ -67,7 +67,7 @@ Object.defineProperty(Task.prototype, 'priority',{
 	}
 });
 
-PriorityMap = ["doesn't need to get done",'Just a reminder','Do this now']
+PriorityMap = ["Not Important",'Important','Very Important']
 $(function(){
 	$('a').on('click',function(){
 		new Task({})
