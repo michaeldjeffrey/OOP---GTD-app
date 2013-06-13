@@ -125,7 +125,7 @@ $(function(){
 		var val = $(this).val()
 		console.log('you are typing and i should be filtering')
 		if(val == ''){
-			fadeAll()
+			unfadeAll()
 		} else {
 			var filt = $.grep(tasks, function(n,i){
 				if(n.tags.length !== 0){
@@ -146,7 +146,9 @@ $(function(){
 	function fadeAll(){
 		$(".accordion-group").addClass('fade')
 	}
-
+	function unfadeAll(){
+		$('.fade').removeClass('fade');
+	}
 
 	function setPriority(task, i){
 		task._priority++;
