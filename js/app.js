@@ -123,8 +123,9 @@ $(function(){
 
 	$("#appendedInputButton").on('keyup', function(){
 		var val = $(this).val()
+		console.log('you are typing and i should be filtering')
 		if(val == ''){
-			removeFade()
+			fadeAll()
 		} else {
 			var filt = $.grep(tasks, function(n,i){
 				if(n.tags.length !== 0){
@@ -135,15 +136,15 @@ $(function(){
 					}
 				}
 			})
-			removeFade()
+			fadeAll()
 			filt.forEach(function(n, i){
 				$("#"+n._id).removeClass('fade')
 			})
 		}
 	})
 
-	function removeFade(){
-		$(".fade").removeClass('fade')
+	function fadeAll(){
+		$(".accordion-group").addClass('fade')
 	}
 
 
@@ -198,6 +199,7 @@ $(function(){
 
 
 	function makeTask (task){
+		console.log('from make Task: ', task._id)
 		if(task !== null){
 			var hasDescription = false;
 			var hasSubtasks = false;
