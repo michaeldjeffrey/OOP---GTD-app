@@ -50,7 +50,7 @@ $(function(){
         var text = $("#simple_task_text");
         var task = new Task({text: text.val(), priority: 0, sort_order: TASKS.length});
         // TASKS.push(renderTask(task));
-        // localStorage_save(task);
+        // localstorage_save(task);
         text.val('');
     });
 
@@ -68,8 +68,9 @@ $(function(){
         variables['sort_order'] = TASKS.length
 
         // TASKS.push(renderTask(task))
-        // localStorage_save(task)
+        // localstorage_save(task)
 
+        complex_task_defaults()
         console.log(variables)
     });
 })
