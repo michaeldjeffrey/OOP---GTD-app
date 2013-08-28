@@ -27,6 +27,10 @@ $(function(){
     // init datepicker and clockpick
     $("#complex_task_datepicker").datepicker();
     $("#complex_task_clockpick").clockpick();
+    // keep both title fields the same
+    $(".task-title").on('keyup', function(){
+        $(".task-title").val($(this).val());
+    })
 
 //=========================== BUTTON CLICK METHODS =============================
     // Set importance data in modal window
@@ -67,6 +71,7 @@ $(function(){
         variables['subtasks'] = complex_task_subtasks()
         variables['sort_order'] = TASKS.length
 
+        // var task = new Task(variables)
         // TASKS.push(renderTask(task))
         // localstorage_save(task)
 
