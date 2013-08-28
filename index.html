@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="row-fluid well">
+			<div class="row-fluid">
 				<div id="trash" class="pull-left">
 					<i class="icon-trash trash" data-toggle="tooltip" title="Drag items here to remove"></i>
 				</div>
@@ -28,7 +28,82 @@
 					</div>
 				</div>
 			</div>
+			<hr>
+			<div class="row-fluid text-center">
+				<div class="input-append span12">
+					<input type="text" class="span7 input-large taskTitle" id="task-text" placeholder="New Task...">
+					<button id="addBtn" class="btn btn-primary">Add</button>
+					<a href="#task_modal" class="btn btn-primary" data-toggle='modal'>Options</a>
+				</div>
+			</div>
+			<div class="accordion" id="task-wrapper">
+			</div>
 		</div>
+
+
+		<div id="task_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModL" aria-hidden="true">
+			<div class="modal-header">
+				<button class="close" aria-hidden="true" data-dismiss="modal" type="button">&times;</button>
+				<h3>Add Task</h3>
+			</div>
+			<div class="modal-body">
+				<form id='advanced-task-form'>
+					<div class="row-fluid">
+					<input type="text" class="span12 input-large" placeholder="New Task...">
+					</div>
+					<div class="row-fluid">
+					<textarea id="task-description" cols="30" rows="5" class="span12" placeholder="Description..."></textarea>
+					</div>
+					<div class="row-fluid">
+					<input type="text" class="span12 input-large" id="options-tags" placeholder="Tags...">
+					</div>
+					<div class="row-fluid">
+						<div class="span6">
+							<div class="input-prepend input-append">
+								<span class="add-on span2">Due</span>
+								<input type="text" class="span5" id="datepicker" placeholder="Date">
+								<input type="text" class="span5 add-on white-background" placeholder="time" id="clockpick">
+							</div>
+						</div>
+						<div class="span3">
+							<div class="btn btn-block text-center" id="importance-btn" data-toggle="tooltip" title="Click to change importance" data-state='low'>
+								<i class="icon-star-empty"></i>
+								<span>Not Important</span>
+							</div>
+						</div>
+						<div class="span3">
+							<div class="btn-group btn-block">
+								<a href="#" class="btn btn-block dropdown-toggle" data-toggle="dropdown">Repeat <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Sunday</p></a></li>
+									<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Monday</p></a></li>
+									<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Tuesday</p></a></li>
+									<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Wednesday</p></a></li>
+									<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Thursday</p></a></li>
+									<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Friday</p></a></li>
+									<li><a class="unselectable"><input class="disInline" type="checkbox"><p class="day disInline">Saturday</p></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class='subtasksInputs'>
+							<input class='input-large' type='text' name='subTaskTitle' placeholder='subtask title'>
+							<i class="icon-plus-sign addSubTask"></i>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				<button id="options-add" class="btn btn-primary" type="button">Add</button>
+			</div>
+		</div>
+
+
+
+
+
 		<div class="formAddNew container">
 			<div class="text-right">
 				<div class="input-append pull-right">
@@ -70,7 +145,7 @@
 						<input class="input-small add-on whitebg" type='text' id='clockpick' placeholder='time'>
 					</div>
 					<div data-toggle="tooltip" title="Click to change importance" class="btn unselectable hasTooltip starPadding" id="setStar">
-						<i  id="star" class="icon-star-empty menuStarStyle"></i>
+						<i id="star" class="icon-star-empty menuStarStyle"></i>
 						<span id="starText">Not important</span>
 					</div>
 					<br>

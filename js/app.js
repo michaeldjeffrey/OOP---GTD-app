@@ -14,7 +14,7 @@ $(function(){
 		}
 	}
 
-	$('[data-toggle="tooltip"]').tooltip();
+
 
 	function reSort_remove(task){
 		for(i=1; i<tasks.length; i++){
