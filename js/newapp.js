@@ -14,7 +14,7 @@ var COMPLEX_TASK_INPUTS = [
     'clockpick',
 ]
 $(function(){
-//=======================================================================
+//================================= INIT PLUGINS ========================
     // init bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip();
     // initialize select2
@@ -28,7 +28,7 @@ $(function(){
     $("#complex_task_datepicker").datepicker();
     $("#complex_task_clockpick").clockpick();
 
-//=======================================================================
+//=========================== BUTTON CLICK METHODS =============================
     // Set importance data in modal window
     $("#importance-btn").on('click', function(){
         var star = $(this).find('i');
@@ -43,7 +43,7 @@ $(function(){
         $(this).parent().append("<br><input class='clearfix input-large' type='text' name='subtask_title' placeholder='subtask title'> ")
     })
 
-//=======================================================================
+//============================== ADDING TASKS =====================================
     // add simple task
     $('#add_simple_task').on('click', function(e){
         e.preventDefault();
