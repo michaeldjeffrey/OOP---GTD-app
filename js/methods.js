@@ -9,7 +9,11 @@ function complex_task_subtasks(){
 }
 
 function complex_task_defaults(){
-
+    $.each(COMPLEX_TASK_INPUTS, function(key, value){
+        $("#complex_task_"+value).val('')
+    })
+    $(".task_title").val('');
+    STAR_IMPORTANCE_STATE = 0;
 }
 //======================== LOCAL STORAGE METHODS =========================
 function localstorage_retrieve(){
