@@ -11,9 +11,24 @@
 		<link href="css/chosen.css" rel="stylesheet">
 		<link href="ui-lightness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
 		<link rel='stylesheet' type='text/css' href='css/main.css'/>
+		<link rel='stylesheet' type='text/css' href='css/overrides.css'/>
 		<link href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
+		<div class="container">
+			<div class="row-fluid well">
+				<div id="trash" class="pull-left">
+					<i class="icon-trash trash" data-toggle="tooltip" title="Drag items here to remove"></i>
+				</div>
+				<div class="pull-right">
+					<a href="#" class="btn themeBtn">Light</a><a href="#" class="btn themeBtn">Dark</a>
+					<div class="input-append">
+						<input type="text" id="appendInputButton" class="input-medium" placeholder="tags...">
+						<button class="btn" type="button">Search</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="formAddNew container">
 			<div class="text-right">
 				<div class="input-append pull-right">
