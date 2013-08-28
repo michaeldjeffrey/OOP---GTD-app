@@ -1,5 +1,4 @@
-// var TASKS = localStorage_retrieve()
-var TASKS = []
+var TASKS = localstorage_retrieve()
 var TAGS_ARRAY = []
 var STAR_IMPORTANCE_STATE = 0
 var STAR_IMPORTANCE = {
