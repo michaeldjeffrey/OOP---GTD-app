@@ -31,8 +31,8 @@
 			<hr>
 			<div class="row-fluid text-center">
 				<div class="input-append span12">
-					<input type="text" class="span7 input-large taskTitle" id="task-text" placeholder="New Task...">
-					<button id="addBtn" class="btn btn-primary">Add</button>
+					<input type="text" class="span7 input-large taskTitle" id="simple_task_text" placeholder="New Task...">
+					<button id="add_simple_task" class="btn btn-primary">Add</button>
 					<a href="#task_modal" class="btn btn-primary" data-toggle='modal'>Options</a>
 				</div>
 			</div>
@@ -47,22 +47,22 @@
 				<h3>Add Task</h3>
 			</div>
 			<div class="modal-body">
-				<form id='advanced-task-form'>
+				<form id='advanced_task_form'>
 					<div class="row-fluid">
-					<input type="text" class="span12 input-large" placeholder="New Task...">
+					<input id='complex_task_title' type="text" class="span12 input-large" placeholder="New Task...">
 					</div>
 					<div class="row-fluid">
-					<textarea id="task-description" cols="30" rows="5" class="span12" placeholder="Description..."></textarea>
+					<textarea id="complex_task_description" cols="30" rows="5" class="span12" placeholder="Description..."></textarea>
 					</div>
 					<div class="row-fluid">
-					<input type="text" class="span12 input-large" id="options-tags" placeholder="Tags...">
+					<input id='complex_task_tags' type="text" class="span12 input-large" id="options-tags" placeholder="Tags...">
 					</div>
 					<div class="row-fluid">
 						<div class="span6">
 							<div class="input-prepend input-append">
 								<span class="add-on span2">Due</span>
-								<input type="text" class="span5" id="datepicker" placeholder="Date">
-								<input type="text" class="span5 add-on white-background" placeholder="time" id="clockpick">
+								<input type="text" class="span5" id="complex_task_datepicker" placeholder="Date">
+								<input type="text" class="span5 add-on white-background" placeholder="time" id="complex_task_clockpick">
 							</div>
 						</div>
 						<div class="span3">
@@ -88,15 +88,15 @@
 					</div>
 					<div class="row-fluid">
 						<div class='subtasksInputs'>
-							<input class='input-large' type='text' name='subTaskTitle' placeholder='subtask title'>
-							<i class="icon-plus-sign addSubTask"></i>
+							<input class='input-large' type='text' name='subtask_title' placeholder='subtask title'>
+							<i id="complex_task_add_subtask" class="icon-plus-sign"></i>
 						</div>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-				<button id="options-add" class="btn btn-primary" type="button">Add</button>
+				<button id="add_complex_task" class="btn btn-primary" type="button">Add</button>
 			</div>
 		</div>
 
@@ -181,6 +181,8 @@
 		<script type="text/javascript" src="js/localStorage.js"></script>
 		<script type="text/javascript" src="js/themeSwitcher.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/newapp.js"></script>
+		<script type="text/javascript" src="js/methods.js"></script>
 		<script type="text/javascript" src="js/moment.js"></script>
 	</body>
 </html>
