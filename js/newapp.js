@@ -51,7 +51,7 @@ $(function(){
         $(this).parent().append("<br><input class='clearfix input-large' type='text' name='subtask_title' placeholder='subtask title'> ")
     });
     // When a tasks checkmark is clicked
-    $('#task_wrapper').on('click', "[id^='check']", function(e){
+    $('#task_wrapper').on('click', "[id^='check_']", function(e){
         e.stopPropagation();
         // TODO: save the task as completed or not completed
         $(this)
@@ -60,7 +60,14 @@ $(function(){
             .closest('.accordion-group')
             .toggleClass('completed');
     });
-    
+    $("#task_wrapper").on('click', "[id^='item_star_']", function(e){
+        e.stopPropagation();
+        // TODO: save the task importance
+        var star = $(this).data('importance');
+        $(this).removeClass(STAR_IMPORTANCE[star]['star'])
+        star = star == 2 ? $(this).data('importance', 0).data('importance') : $(this).data('importance', ++star).data('importance');
+        $(this).addClass(STAR_IMPORTANCE[star]['star'])
+    })
 
 //============================== ADDING TASKS =====================================
     // add simple task
@@ -119,6 +126,7 @@ function render_task(task){
     _title = _title.replace("{title}", title)
     _title = _title.replace("{completed_state}", completed_state)
     _title = _title.replace("{completed_state_class}", TASK_STATUS[completed_state])
+    _title = _title.replace("{importance}", priority)
     _title = _title.replace("{priority}", STAR_IMPORTANCE[priority]['star'])
 
     if(description || tags || subtasks){
