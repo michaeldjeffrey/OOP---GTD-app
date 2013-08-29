@@ -26,7 +26,6 @@ $(function(){
 	function reSort(task){ // this is dumb as fuck and i cant figure it out, I suck!
 		var taskObj = tasks[task.attr('id')];
 		var nextTask = parseInt(task.next().attr('id'));
-		console.log(nextTask);
 		var tempId = nextTask;
 		for(var i = 0; i < tasks.length; i++){
 			if(tasks[i]._id >= nextTask){
@@ -123,7 +122,6 @@ $(function(){
 
 	$("#appendedInputButton").on('keyup', function(){
 		var val = $(this).val()
-		console.log('you are typing and i should be filtering')
 		if(val == ''){
 			unfadeAll()
 		} else {
@@ -201,7 +199,6 @@ $(function(){
 
 
 	function makeTask (task){
-		console.log('from make Task: ', task._id)
 		if(task !== null){
 			var hasDescription = false;
 			var hasSubtasks = false;
@@ -306,7 +303,6 @@ $(function(){
 								$(this).parent().parent().removeClass('completed')
 							}
 							for (var i = 0; i < tasks.length; i++) {
-								console.log('task ids from creation', tasks[i]._id)
 								if(comp == tasks[i]._id){
 									tasks[i].status = status;
 									saveTask_localStorage(tasks[i])

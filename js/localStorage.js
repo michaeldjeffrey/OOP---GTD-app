@@ -7,7 +7,6 @@ function retrieve_localStorage(){
 	for ( var i = 0; i < localStorage.length; i++){
 		a.push(new Task(JSON.parse(localStorage.getItem(i))));
   }
-  console.log('from retrieve localStorage',a);
   return a;
 }
 function removeTask_localStorage(task){

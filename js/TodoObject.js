@@ -1,7 +1,6 @@
 // require user to provide text
 function Task (obj) {
 	//console.log('Task object created', 'obj: ' + JSON.stringify(obj))
-
 	// this._id = Math.floor(Math.random()*100) // init to number of tasks +1
 	this._id = obj._id || localStorage.length; // init to number of tasks +1
 	this.status = obj.status || 'incomplete' // init to incomplete

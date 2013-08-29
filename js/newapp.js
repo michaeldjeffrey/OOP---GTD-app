@@ -1,4 +1,8 @@
 var TASKS = localstorage_retrieve()
+var TASK_STATUS = {
+    'completed': 'icon-check-sign checkedStyle pull-left',
+    'incomplete': 'icon-check-empty checkStyle pull-left',
+}
 var TAGS_ARRAY = []
 var STAR_IMPORTANCE_STATE = 0
 var STAR_IMPORTANCE = {
@@ -53,7 +57,7 @@ $(function(){
         e.preventDefault();
         var text = $("#simple_task_text");
         var task = new Task({text: text.val(), priority: 0, sort_order: TASKS.length});
-        // TASKS.push(renderTask(task));
+        // TASKS.push(render_task(task));
         // localstorage_save(task);
         text.val('');
     });
@@ -65,17 +69,63 @@ $(function(){
             variables[value] = $("#complex_task_"+value).val()
         })
         variables['due_date'] = variables['datepicker'] + ' ' + variables['clockpick'];
+        variables['tags'] = variables['tags'].split(',')
         // TODO: convert to object method
         variables['due_date'] = moment(variables['due_date']).fromNow();
         variables['priority'] = STAR_IMPORTANCE_STATE;
         variables['subtasks'] = complex_task_subtasks()
         variables['sort_order'] = TASKS.length
 
-        // var task = new Task(variables)
-        // TASKS.push(renderTask(task))
+        var task = new Task(variables)
+        render_task(task)
+        // TASKS.push(render_task(task))
         // localstorage_save(task)
 
         complex_task_defaults()
         console.log(variables)
     });
 })
+//============================== RENDER TASKS =====================================
+function render_task(task){
+    console.log("render task called")
+    var collapse_id, due_date, heading, description, completed_state, priority, tags;
+    var has_description = has_subtasks = has_tags = collapse = false;
+    var _title, _body;
+
+    collapse_id = task._id;
+    due_date = task.due_date;
+    heading = task.title;
+    console.log(task.description)
+    // if description is null, set to false
+    description = (task.description != null) ? task.description: false;
+    completed_state = task.status;
+    priority = task._priority;
+    // if tags is not greater than zero, set to false
+    tags = (task.tags.length > 0) ? task.tags : false;
+    subtasks = (task.subtasks.length > 0) ? task.subtasks : false;
+
+    _title = TASK_ELEMENT.replace(/{collapse_id}/g, collapse_id)
+    _title = _title.replace("{due_date}", due_date)
+    _title = _title.replace("{heading}", heading)
+    _title = _title.replace("{completed_state}", TASK_STATUS[completed_state])
+    _title = _title.replace("{priority}", STAR_IMPORTANCE[priority]['star'])
+
+    if(description || tags || subtasks){
+        _body = COLLAPSE_ELEMENT.replace('{collapse_id}', collapse_id)
+
+        // turn into empty string if it doesn't exist
+        description = description ? description : '';
+        tags = tags ? build_tags(tags) : '';
+        subtasks = subtasks ? build_subtasks(subtasks) : '';
+
+        // replace in template string
+        _body = _body.replace('{description}', description)
+        _body = _body.replace('{tags}', tags)
+        _body = _body.replace('{subtasks}', subtasks)
+        _title = _title.replace('{collapse}', _body)
+    } else {
+        _title = _title.replace('{collapse}', ' ')
+    }
+    // if()
+    $('body').append(_title);
+}
