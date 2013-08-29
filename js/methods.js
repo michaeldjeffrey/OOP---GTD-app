@@ -40,6 +40,7 @@ function localstorage_delete(task){
 
 //======================== TASK RENDERING =========================
 function build_subtasks(subtasks){
+    // TODO: make this display nicer output
     var temp_string = '';
     $.each(subtasks, function(key, value){
         temp_string += value.text+", "
