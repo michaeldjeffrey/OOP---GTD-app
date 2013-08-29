@@ -60,8 +60,8 @@ function build_tags(tags){
 var TASK_ELEMENT =  "<div class='accordion-group'> \
                         <div class='accordion-heading'> \
                             <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' href='#collapse{collapse_id}'> \
-                                {heading} \
-                                <i id='check{collapse_id}' class='{completed_state} checkStyle pull-left'></i> \
+                                {title} \
+                                <i id='check{collapse_id}' data-status='{completed_state}' class='{completed_state_class} checkStyle pull-left'></i> \
                                 <i id='itemStar{collapse_id}' class='{priority} starStyle pull-left'></i> \
                                 <div class='sepLine pull-left'></div> \
                                 <span class='pull-right'>{due_date}</span> \

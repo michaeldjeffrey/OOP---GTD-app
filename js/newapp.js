@@ -1,7 +1,7 @@
 var TASKS = localstorage_retrieve()
 var TASK_STATUS = {
-    'completed': 'icon-check-sign checkedStyle pull-left',
-    'incomplete': 'icon-check-empty checkStyle pull-left',
+    'completed': 'icon-check-sign',
+    'incomplete': 'icon-check-empty',
 }
 var TAGS_ARRAY = []
 var STAR_IMPORTANCE_STATE = 0
@@ -45,11 +45,22 @@ $(function(){
         STAR_IMPORTANCE_STATE = STAR_IMPORTANCE_STATE == 2 ? 0 : ++STAR_IMPORTANCE_STATE;
         star.removeClass().addClass(STAR_IMPORTANCE[STAR_IMPORTANCE_STATE]['star']);
         text.text(STAR_IMPORTANCE[STAR_IMPORTANCE_STATE]['text']);
-    })
+    });
     // add subtask field
     $("#complex_task_add_subtask").on('click', function(){
         $(this).parent().append("<br><input class='clearfix input-large' type='text' name='subtask_title' placeholder='subtask title'> ")
-    })
+    });
+    // When a tasks checkmark is clicked
+    $('#task_wrapper').on('click', "[id^='check']", function(e){
+        e.stopPropagation();
+        // TODO: save the task as completed or not completed
+        $(this)
+            .toggleClass('icon-check-sign')
+            .toggleClass('icon-check-empty')
+            .closest('.accordion-group')
+            .toggleClass('completed');
+    });
+    
 
 //============================== ADDING TASKS =====================================
     // add simple task
@@ -59,6 +70,7 @@ $(function(){
         var task = new Task({text: text.val(), priority: 0, sort_order: TASKS.length});
         // TASKS.push(render_task(task));
         // localstorage_save(task);
+        render_task(task);
         text.val('');
     });
 
@@ -87,15 +99,13 @@ $(function(){
 })
 //============================== RENDER TASKS =====================================
 function render_task(task){
-    console.log("render task called")
-    var collapse_id, due_date, heading, description, completed_state, priority, tags;
+    var collapse_id, due_date, title, description, completed_state, priority, tags;
     var has_description = has_subtasks = has_tags = collapse = false;
     var _title, _body;
 
     collapse_id = task._id;
     due_date = task.due_date;
-    heading = task.title;
-    console.log(task.description)
+    title = task.text;
     // if description is null, set to false
     description = (task.description != null) ? task.description: false;
     completed_state = task.status;
@@ -106,8 +116,9 @@ function render_task(task){
 
     _title = TASK_ELEMENT.replace(/{collapse_id}/g, collapse_id)
     _title = _title.replace("{due_date}", due_date)
-    _title = _title.replace("{heading}", heading)
-    _title = _title.replace("{completed_state}", TASK_STATUS[completed_state])
+    _title = _title.replace("{title}", title)
+    _title = _title.replace("{completed_state}", completed_state)
+    _title = _title.replace("{completed_state_class}", TASK_STATUS[completed_state])
     _title = _title.replace("{priority}", STAR_IMPORTANCE[priority]['star'])
 
     if(description || tags || subtasks){
@@ -127,5 +138,5 @@ function render_task(task){
         _title = _title.replace('{collapse}', ' ')
     }
     // if()
-    $('body').append(_title);
+    $('#task_wrapper').append(_title);
 }
