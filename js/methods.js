@@ -12,6 +12,7 @@ function complex_task_defaults(){
         $("#complex_task_"+value).val('')
     })
     $(".task_title").val('');
+    $("#task_modal").modal('hide');
     STAR_IMPORTANCE_STATE = 0;
 }
 //======================== LOCAL STORAGE METHODS =========================
