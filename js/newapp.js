@@ -107,7 +107,6 @@ $(function(){
 //============================== RENDER TASKS =====================================
 function render_task(task){
     var collapse_id, due_date, title, description, completed_state, priority, tags;
-    var has_description = has_subtasks = has_tags = collapse = false;
     var _title, _body;
 
     collapse_id = task._id;
