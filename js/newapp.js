@@ -87,8 +87,8 @@ $(function(){
     $('#add_simple_task').on('click', function(e){
         e.preventDefault();
         var text = $("#simple_task_text");
-        var task = new Task({text: text.val(), priority: 0, sort_order: TASKS.length});
-        TASKS.push(task);
+        var task = new Task({text: text.val(), priority: 0, _id: TASKS.length});
+        TASKS.push(task)
         localstorage_save(task);
         render_task(task);
         text.val('');
@@ -107,6 +107,7 @@ $(function(){
         variables['priority'] = STAR_IMPORTANCE_STATE;
         variables['subtasks'] = complex_task_subtasks()
         variables['sort_order'] = TASKS.length
+        variables['_id'] = TASKS.length
 
         var task = new Task(variables)
         render_task(task)
