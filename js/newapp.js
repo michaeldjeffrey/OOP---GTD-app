@@ -20,14 +20,16 @@ var COMPLEX_TASK_INPUTS = [
 ]
 $(function(){
 //====================== MAKE TASKS FROM LOCALSTORAGE ========================
-    $.each(TASKS, function(key, task){
-        render_task(task);
+    for(task in TASKS){
+        var task = TASKS[task];
+        render_task(task)
         if(typeof(task.tags) !== 'undefined'){
             $.each(task.tags, function(key2, tag){
                 AUTOCOMPLETE_TAGS.push(tag)
             })
         }
-    })
+        
+    }
 //================================= INIT PLUGINS ========================
     // init bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip();
