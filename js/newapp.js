@@ -47,7 +47,29 @@ $(function(){
     $(".task-title").on('keyup', function(){
         $(".task-title").val($(this).val());
     })
-    $(".accordion").sortable()
+    // Make the tasks resortable
+    $("#task_wrapper").sortable({
+        connectWith: '.connectedSortable, #trash',
+        stop: function(event, ui){
+            console.log("I'ms still getting called because I'm a little bitch")
+            resort_tasks_on_drag_stop();
+            localstorage_resort_delete_save();
+        }
+    }).disableSelection();
+    // Drop the tasks on the trash to delete them
+    $("#trash").droppable({
+        accept: ".accordion-group",
+        hoverClass: "active",
+        drop: function(event, ui) {
+            event.stopPropagation();
+            event.preventDefault();
+            var id = ui.draggable.data('id')
+            ui.draggable.remove();
+            TASKS.splice(id, 1)
+            resort_on_task_remove();
+            localstorage_resort_delete_save();
+        }
+    });
 
 //=========================== BUTTON CLICK METHODS =============================
     // Set importance data in modal window
