@@ -35,10 +35,12 @@ $(function(){
     // initialize select2
     $("#complex_task_tags").select2({
         tags: TAGS_ARRAY,
-        tokenSeparators: [',', ' ']
+        tokenSeparators: [',', ' '],
+        width: '100%',
     }).on('select-selecting', function(e){
         TAGS_ARRAY.push(e.val);
     });
+
     // init datepicker and clockpick
     $("#complex_task_datepicker").datepicker();
     $("#complex_task_clockpick").clockpick();
