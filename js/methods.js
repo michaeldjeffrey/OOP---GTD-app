@@ -35,7 +35,8 @@ function resort_on_task_remove(){
 function localstorage_retrieve(){
     var saved_tasks = []
     for (var i = 0; i < localStorage.length; i++) {
-        saved_tasks.push(new Task(JSON.parse(localStorage.getItem(i))))
+        var task = new Task(JSON.parse(localStorage.getItem(i)))
+        saved_tasks.push(task)
     }
     return saved_tasks
 }
@@ -54,6 +55,12 @@ function localstorage_delete(task){
         })
     }
 }
+function localstorage_resort_delete_save(){
+    localStorage.clear()
+    for(task in TASKS){
+        localstorage_save(TASKS[task])
+    }
+}
 
 //======================== TASK RENDERING =========================
 function build_subtasks(subtasks){
@@ -70,12 +77,11 @@ function build_tags(tags){
     for (var i = 0; i < tags.length; i++) {
         // TODO: replace &emsp; with a class
         temp_string += '<span class="label label-info">'+ tags[i] +'</span>&emsp;'
-        
     };
     return temp_string
 }
 
-var TASK_ELEMENT =  "<div class='accordion-group'> \
+var TASK_ELEMENT =  "<div class='accordion-group' data-id='{collapse_id}'> \
                         <div class='accordion-heading'> \
                             <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' href='#collapse_{collapse_id}'> \
                                 {title} \
