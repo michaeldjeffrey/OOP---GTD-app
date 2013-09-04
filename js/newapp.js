@@ -28,7 +28,6 @@ $(function(){
                 AUTOCOMPLETE_TAGS.push(tag)
             })
         }
-        
     }
 //================================= INIT PLUGINS ========================
     // init bootstrap tooltips
@@ -70,7 +69,33 @@ $(function(){
             localstorage_resort_delete_save();
         }
     });
-
+//=========================== SEARCH BY TAGS =============================
+    $("#search").autocomplete({
+        source: AUTOCOMPLETE_TAGS,
+        minLength: 0
+    }).bind('focus', function(){
+        $(this).autocomplete('search')
+    });
+    $("#search").on('keyup', function(){
+        var val = $(this).val();
+        if(val == ''){
+            unfade_all_tasks();
+        } else {
+            var filter = $.grep(TASKS, function(task, key){
+                if(task.tags.length !== 0){
+                    for(tag in task.tags){
+                        if(task.tags[tag].indexOf(val) == 0){
+                            return task;
+                        }
+                    }
+                }
+            })
+            fade_all_tasks();
+            $.each(filter, function(key, value){
+                $("#task_wrapper").find("[data-id='"+value._id+"']").removeClass('fade')
+            })
+        }
+    })
 //=========================== BUTTON CLICK METHODS =============================
     // Set importance data in modal window
     $("#importance-btn").on('click', function(){
