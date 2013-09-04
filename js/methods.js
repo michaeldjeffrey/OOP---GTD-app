@@ -48,6 +48,7 @@ function localstorage_retrieve(){
     return saved_tasks
 }
 function localstorage_save(task){
+    console.log(task)
     localStorage.setItem(task._id, JSON.stringify(task))
 }
 function localstorage_delete(task){
@@ -87,7 +88,7 @@ function build_tags(tags){
     return temp_string
 }
 
-var TASK_ELEMENT =  "<div class='accordion-group' data-id='{collapse_id}'> \
+var TASK_ELEMENT =  "<div class='accordion-group {completed_state}' data-id='{collapse_id}'> \
                         <div class='accordion-heading'> \
                             <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' href='#collapse_{collapse_id}'> \
                                 {title} \

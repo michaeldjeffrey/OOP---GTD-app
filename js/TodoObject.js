@@ -7,7 +7,7 @@ function Task (obj) {
 	this.status = obj.status || 'incomplete' // init to incomplete
 	this.text = obj.text || throwErr("need text to make a task") //throw "Text Required"
 	this.description = obj.description || null; //throwErr('need a description so you know what to do ') // init to description if provided
-	this.priority = obj.priority || 0 // init to low
+	this.priority = obj.priority // init to low
 
 	this.tags = [];
 	if(obj.tags !== undefined){
@@ -56,23 +56,7 @@ Task.prototype = {
 		}
 	}
 };
-Object.defineProperty(Task.prototype, 'priority',{
-	enumerable: true,
-	get: function(){
-		// return index from array
-		return PriorityMap[this._priority];
-	},
-	set: function(pri){
-		this._priority = pri;
-	}
-});
 
-PriorityMap = ["Not Important",'Important','Very Important']
-$(function(){
-	$('a').on('click',function(){
-		new Task({})
-	})
-})
 
 function throwErr(msg){
 	// throw new Error(msg)

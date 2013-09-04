@@ -113,7 +113,13 @@ $(function(){
     // When a tasks checkmark is clicked
     $('#task_wrapper').on('click', "[id^='check_']", function(e){
         e.stopPropagation();
-        // TODO: save the task as completed or not completed
+        var active_task = $(this).closest('.accordion-group').data("id")
+        for(task in TASKS){
+            if(TASKS[task]._id == active_task){
+                TASKS[task].status = TASKS[task].status == 'incomplete' ? 'completed' : 'incomplete';
+                localstorage_save(TASKS[task])
+            }
+        }
         $(this)
             .toggleClass('icon-check-sign')
             .toggleClass('icon-check-empty')
@@ -127,6 +133,15 @@ $(function(){
         $(this).removeClass(STAR_IMPORTANCE[star]['star'])
         star = star == 2 ? $(this).data('importance', 0).data('importance') : $(this).data('importance', ++star).data('importance');
         $(this).addClass(STAR_IMPORTANCE[star]['star'])
+        var active_task = $(this).closest('.accordion-group').data('id');
+        for(task in TASKS){
+            if(TASKS[task]._id == active_task){
+                console.log(TASKS[task])
+                TASKS[task].priority = star;
+                console.log(TASKS[task])
+                localstorage_save(TASKS[task])
+            }
+        }
     })
 
 //============================== ADDING TASKS =====================================
@@ -176,7 +191,7 @@ function render_task(task){
     // if description is null, set to false
     description = (task.description != null) ? task.description: false;
     completed_state = task.status;
-    priority = task._priority;
+    priority = task.priority;
     // if tags is not greater than zero, set to false
     tags = (task.tags.length > 0) ? task.tags : false;
     subtasks = (task.subtasks.length > 0) ? task.subtasks : false;
@@ -184,7 +199,7 @@ function render_task(task){
     _title = TASK_ELEMENT.replace(/{collapse_id}/g, collapse_id)
     _title = _title.replace("{due_date}", due_date)
     _title = _title.replace("{title}", title)
-    _title = _title.replace("{completed_state}", completed_state)
+    _title = _title.replace(/{completed_state}/g, completed_state)
     _title = _title.replace("{completed_state_class}", TASK_STATUS[completed_state])
     _title = _title.replace("{importance}", priority)
     _title = _title.replace("{priority}", STAR_IMPORTANCE[priority]['star'])
