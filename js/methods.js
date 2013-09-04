@@ -31,6 +31,13 @@ function resort_on_task_remove(){
         TASKS[task]._id = task;
     };
 }
+
+function unfade_all_tasks(){
+    $(".fade").removeClass('fade')
+}
+function fade_all_tasks(){
+    $(".accordion-group").addClass('fade');
+}
 //======================== LOCAL STORAGE METHODS =========================
 function localstorage_retrieve(){
     var saved_tasks = []
@@ -73,7 +80,6 @@ function build_subtasks(subtasks){
 }
 function build_tags(tags){
     var temp_string = '';
-    console.log('building tags', tags)
     for (var i = 0; i < tags.length; i++) {
         // TODO: replace &emsp; with a class
         temp_string += '<span class="label label-info">'+ tags[i] +'</span>&emsp;'
