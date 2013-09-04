@@ -5,6 +5,7 @@
 .well{
      box-sizing: border-box;
 }
+/* style hovered elements in jquery ui autocomplete */
 .ui-autocomplete{
     padding: 0;
 }
@@ -22,4 +23,18 @@
 .ui-widget-header .ui-state-focus {
     outline: 1px solid #79b7e7;
     border: none;
+}
+/* style select2 element that is not playing nice */
+.select2-container{
+    margin-bottom: 10px;
+}
+.select2-choices{
+    border-radius: 5px;
+}
+.select2-choices:focus{
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.select2-drop{
+    top: 0%;
 }
