@@ -1,4 +1,5 @@
-var TASKS = localstorage_retrieve()
+var TASKS = localstorage_retrieve();
+var AUTOCOMPLETE_TAGS = [];
 var TASK_STATUS = {
     'completed': 'icon-check-sign',
     'incomplete': 'icon-check-empty',
@@ -18,6 +19,15 @@ var COMPLEX_TASK_INPUTS = [
     'clockpick',
 ]
 $(function(){
+//====================== MAKE TASKS FROM LOCALSTORAGE ========================
+    $.each(TASKS, function(key, task){
+        render_task(task);
+        if(typeof(task.tags) !== 'undefined'){
+            $.each(task.tags, function(key2, tag){
+                AUTOCOMPLETE_TAGS.push(tag)
+            })
+        }
+    })
 //================================= INIT PLUGINS ========================
     // init bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip();
@@ -35,6 +45,7 @@ $(function(){
     $(".task-title").on('keyup', function(){
         $(".task-title").val($(this).val());
     })
+    $(".accordion").sortable()
 
 //=========================== BUTTON CLICK METHODS =============================
     // Set importance data in modal window
@@ -75,8 +86,8 @@ $(function(){
         e.preventDefault();
         var text = $("#simple_task_text");
         var task = new Task({text: text.val(), priority: 0, sort_order: TASKS.length});
-        // TASKS.push(render_task(task));
-        // localstorage_save(task);
+        TASKS.push(task);
+        localstorage_save(task);
         render_task(task);
         text.val('');
     });
@@ -97,8 +108,8 @@ $(function(){
 
         var task = new Task(variables)
         render_task(task)
-        // TASKS.push(render_task(task))
-        // localstorage_save(task)
+        TASKS.push(task)
+        localstorage_save(task)
 
         complex_task_defaults()
         console.log(variables)
