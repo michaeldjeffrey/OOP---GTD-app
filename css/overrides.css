@@ -5,3 +5,21 @@
 .well{
      box-sizing: border-box;
 }
+.ui-autocomplete{
+    padding: 0;
+}
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    outline: 0px solid #c5dbec;
+    border: none;
+}
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+    outline: 1px solid #79b7e7;
+    border: none;
+}
