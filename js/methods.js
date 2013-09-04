@@ -15,6 +15,22 @@ function complex_task_defaults(){
     $("#task_modal").modal('hide');
     STAR_IMPORTANCE_STATE = 0;
 }
+
+function resort_tasks_on_drag_stop(){
+    var tasks = $("#task_wrapper").children();
+    for (var task = 0; task < tasks.length; task++) {
+        console.log("tasks", tasks)
+        console.log("task", $(tasks[task]).data('id'))
+        TASKS[$(tasks[task]).data('id')]._id = task;
+    };
+}
+
+function resort_on_task_remove(){
+    for (var task = 0; task < TASKS.length; task++) {
+        $("#task_wrapper").find('[data-id="'+TASKS[task]._id+'"]').data('id', task)
+        TASKS[task]._id = task;
+    };
+}
 //======================== LOCAL STORAGE METHODS =========================
 function localstorage_retrieve(){
     var saved_tasks = []
