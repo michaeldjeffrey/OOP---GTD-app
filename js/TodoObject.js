@@ -115,6 +115,7 @@ Task.prototype = {
 	    for(task in TASKS){
 	        TASKS[task].save()
 	    }
+	    return this;
 	}
 }
 
