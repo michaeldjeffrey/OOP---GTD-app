@@ -66,8 +66,7 @@ Task.prototype = {
 	    completed_state = this.status;
 	    priority = this.priority;
 	    // if tags is not greater than zero, set to false
-	    console.log(this.tags)
-	    tags = (this.tags[0] !== '') ? this.tags : false;
+	    tags = (this.tags[0] !== '' && this.tags.length > 0) ? this.tags : false;
 	    subtasks = (this.subtasks.length > 0) ? this.subtasks : false;
 
 	    _title = TASK_ELEMENT.replace(/{collapse_id}/g, collapse_id)
@@ -77,7 +76,7 @@ Task.prototype = {
 	    _title = _title.replace("{completed_state_class}", TASK_STATUS[completed_state])
 	    _title = _title.replace("{importance}", priority)
 	    _title = _title.replace("{priority}", STAR_IMPORTANCE[priority]['star'])
-
+	    
 	    if(description || tags || subtasks){
 	    	console.log(description, tags, subtasks)
 	        _body = COLLAPSE_ELEMENT.replace('{collapse_id}', collapse_id)
@@ -97,6 +96,12 @@ Task.prototype = {
 	    }
 	    // if()
 	    $('#task_wrapper').append(_title);
+	    TASKS.push(this)
+	    return this;
+	},
+	localstorage_save: function(){
+		localStorage.setItem(this._id, JSON.stringify(this))
+		return this;
 	}
 }
 

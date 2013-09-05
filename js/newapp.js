@@ -22,7 +22,7 @@ $(function(){
 //====================== MAKE TASKS FROM LOCALSTORAGE ========================
     for(task in TASKS){
         var task = TASKS[task];
-        render_task(task)
+        task.render()
         if(typeof(task.tags) !== 'undefined'){
             $.each(task.tags, function(key2, tag){
                 AUTOCOMPLETE_TAGS.push(tag)
@@ -151,9 +151,7 @@ $(function(){
         e.preventDefault();
         var text = $("#simple_task_text");
         var task = new Task({text: text.val(), priority: 0, _id: TASKS.length});
-        TASKS.push(task)
-        localstorage_save(task);
-        task.render()
+        task.render().localstorage_save()
         $(".task-title").val('');
     });
 
@@ -171,10 +169,9 @@ $(function(){
         variables['subtasks'] = complex_task_subtasks()
         variables['sort_order'] = TASKS.length
         variables['_id'] = TASKS.length
+        
         var task = new Task(variables)
-        task.render()
-        TASKS.push(task)
-        localstorage_save(task)
+        task.render().localstorage_save()
 
         complex_task_defaults()
     });

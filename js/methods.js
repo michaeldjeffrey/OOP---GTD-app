@@ -11,7 +11,7 @@ function complex_task_defaults(){
     $.each(COMPLEX_TASK_INPUTS, function(key, value){
         $("#complex_task_"+value).val('')
     })
-    $(".task_title").val('');
+    $(".task-title").val('');
     $("#task_modal").modal('hide');
     STAR_IMPORTANCE_STATE = 0;
 }
