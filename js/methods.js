@@ -18,9 +18,13 @@ function complex_task_defaults(){
 
 function resort_tasks_on_drag_stop(){
     var tasks = $("#task_wrapper").children();
-    for (var task = 0; task < tasks.length; task++) {
-        TASKS[$(tasks[task]).data('id')]._id = task;
-    };
+    for (var task in tasks) {
+        TASKS[$(tasks[task]).data('id')].id = task;
+    }
+    localStorage.clear()
+    for(var task in TASKS){
+        TASKS[task].save()
+    }
 }
 
 function resort_on_task_remove(){
@@ -39,52 +43,13 @@ function fade_all_tasks(){
 //======================== LOCAL STORAGE METHODS =========================
 function localstorage_retrieve(){
     var saved_tasks = []
-    for (var i = 0; i < localStorage.length; i++) {
-        var task = new Task(JSON.parse(localStorage.getItem(i)))
+    for(var key in localStorage){
+        var task = new Task(JSON.parse(localStorage.getItem(key)))
         saved_tasks.push(task)
     }
     return saved_tasks
 }
-function localstorage_save(task){
-    localStorage.setItem(task._id, JSON.stringify(task))
-}
-function localstorage_delete(task){
-    if(task !== null || task !== undefined){
-        var temp = localstorage_retrieve();
-        localStorage.clear();
-        temp.splice(task._id, 1);
-        // TODO: look at redoing this so I know what's going on
-        temp.forEach(function(key, value){
-            key._id = value;
-            localstorage_save(key)
-        })
-    }
-}
-function localstorage_resort_delete_save(){
-    localStorage.clear()
-    for(task in TASKS){
-        localstorage_save(TASKS[task])
-    }
-}
-
 //======================== TASK RENDERING =========================
-function build_subtasks(subtasks){
-    // TODO: make this display nicer output
-    var temp_string = '';
-    $.each(subtasks, function(key, value){
-        temp_string += value.text+", "
-    })
-    return temp_string;
-}
-function build_tags(tags){
-    var temp_string = '';
-    for (var i = 0; i < tags.length; i++) {
-        // TODO: replace &emsp; with a class
-        temp_string += '<span class="label label-info">'+ tags[i] +'</span>&emsp;'
-    };
-    return temp_string
-}
-
 var TASK_ELEMENT =  "<div class='accordion-group {completed_state}' data-id='{collapse_id}'> \
                         <div class='accordion-heading'> \
                             <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' href='#collapse_{collapse_id}'> \
