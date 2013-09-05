@@ -25,8 +25,8 @@ function resort_tasks_on_drag_stop(){
 
 function resort_on_task_remove(){
     for (var task = 0; task < TASKS.length; task++) {
-        $("#task_wrapper").find('[data-id="'+TASKS[task]._id+'"]').data('id', task)
-        TASKS[task]._id = task;
+        $("#task_wrapper").find('[data-id="'+TASKS[task].id+'"]').data('id', task)
+        TASKS[task].id = task;
     };
 }
 

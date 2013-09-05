@@ -28,12 +28,12 @@ $(function(){
 		var nextTask = parseInt(task.next().attr('id'));
 		var tempId = nextTask;
 		for(var i = 0; i < tasks.length; i++){
-			if(tasks[i]._id >= nextTask){
+			if(tasks[i].id >= nextTask){
 				tempId++;
-				tasks[i]._id = tempId;
+				tasks[i].id = tempId;
 			}
 		}
-		taskObj._id = nextTask;
+		taskObj.id = nextTask;
 	}
 
 	function makeSortable(){
@@ -136,7 +136,7 @@ $(function(){
 			})
 			fadeAll()
 			filt.forEach(function(n, i){
-				$("#"+n._id).removeClass('fade')
+				$("#"+n.id).removeClass('fade')
 			})
 		}
 	})
@@ -203,10 +203,10 @@ $(function(){
 			var hasDescription = false;
 			var hasSubtasks = false;
 			var hasTags = false;
-			var i = task._id;
+			var i = task.id;
 			var ac_group = $(document.createElement('div'))
 			.addClass('accordion-group')
-			.attr('id', task._id)
+			.attr('id', task.id)
 			var ac_heading = $(document.createElement('div'))
 			.addClass('accordion-heading text-left')
 
@@ -284,7 +284,7 @@ $(function(){
 							setPriority(task, i);
 							$(this).removeClass().addClass(setStar + ' starStyle pull-left');
 							for (var i = 0; i < tasks.length; i++) {
-								if(task._id == tasks[i]._id){
+								if(task.id == tasks[i].id){
 									saveTask_localStorage(tasks[i])
 								}
 							}
@@ -303,7 +303,7 @@ $(function(){
 								$(this).parent().parent().removeClass('completed')
 							}
 							for (var i = 0; i < tasks.length; i++) {
-								if(comp == tasks[i]._id){
+								if(comp == tasks[i].id){
 									tasks[i].status = status;
 									saveTask_localStorage(tasks[i])
 								}

@@ -91,7 +91,7 @@ $(function(){
             })
             fade_all_tasks();
             $.each(filter, function(key, value){
-                $("#task_wrapper").find("[data-id='"+value._id+"']").removeClass('fade')
+                $("#task_wrapper").find("[data-id='"+value.id+"']").removeClass('fade')
             })
         }
     })
@@ -114,7 +114,7 @@ $(function(){
         e.stopPropagation();
         var active_task = $(this).closest('.accordion-group').data("id")
         for(task in TASKS){
-            if(TASKS[task]._id == active_task){
+            if(TASKS[task].id == active_task){
                 TASKS[task].status = TASKS[task].status == 'incomplete' ? 'completed' : 'incomplete';
                 localstorage_save(TASKS[task])
             }
@@ -134,7 +134,7 @@ $(function(){
         $(this).addClass(STAR_IMPORTANCE[star]['star'])
         var active_task = $(this).closest('.accordion-group').data('id');
         for(task in TASKS){
-            if(TASKS[task]._id == active_task){
+            if(TASKS[task].id == active_task){
                 console.log(TASKS[task])
                 TASKS[task].priority = star;
                 console.log(TASKS[task])
@@ -166,7 +166,7 @@ $(function(){
         variables['priority'] = STAR_IMPORTANCE_STATE;
         variables['subtasks'] = complex_task_subtasks()
         variables['sort_order'] = TASKS.length
-        variables['_id'] = TASKS.length
+        variables['id'] = TASKS.length
 
         var task = new Task(variables)
         task.render().save()

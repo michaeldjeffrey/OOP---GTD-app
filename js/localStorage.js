@@ -1,5 +1,5 @@
 function saveTask_localStorage (task) {
-	localStorage.setItem(task._id, JSON.stringify(task));
+	localStorage.setItem(task.id, JSON.stringify(task));
 }
 
 function retrieve_localStorage(){
@@ -13,9 +13,9 @@ function removeTask_localStorage(task){
 	if(task !== null || task !== undefined){
     var temp = retrieve_localStorage();
     localStorage.clear()
-    temp.splice(task._id, 1);
+    temp.splice(task.id, 1);
     temp.forEach(function(n,i){
-      n._id = i;
+      n.id = i;
       saveTask_localStorage(n);
     })
  	}
