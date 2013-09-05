@@ -65,9 +65,7 @@ $(function(){
             event.preventDefault();
             var id = ui.draggable.data('id')
             ui.draggable.remove();
-            TASKS.splice(id, 1)
-            resort_on_task_remove();
-            localstorage_resort_delete_save();
+            TASKS[id].remove()
         }
     });
 //=========================== SEARCH BY TAGS =============================
@@ -151,7 +149,7 @@ $(function(){
         e.preventDefault();
         var text = $("#simple_task_text");
         var task = new Task({text: text.val(), priority: 0, _id: TASKS.length});
-        task.render().localstorage_save()
+        task.render().save()
         $(".task-title").val('');
     });
 
@@ -169,9 +167,9 @@ $(function(){
         variables['subtasks'] = complex_task_subtasks()
         variables['sort_order'] = TASKS.length
         variables['_id'] = TASKS.length
-        
+
         var task = new Task(variables)
-        task.render().localstorage_save()
+        task.render().save()
 
         complex_task_defaults()
     });

@@ -78,7 +78,6 @@ Task.prototype = {
 	    _title = _title.replace("{priority}", STAR_IMPORTANCE[priority]['star'])
 	    
 	    if(description || tags || subtasks){
-	    	console.log(description, tags, subtasks)
 	        _body = COLLAPSE_ELEMENT.replace('{collapse_id}', collapse_id)
 
 	        // turn into empty string if it doesn't exist
@@ -99,9 +98,23 @@ Task.prototype = {
 	    TASKS.push(this)
 	    return this;
 	},
-	localstorage_save: function(){
+	save: function(){
 		localStorage.setItem(this._id, JSON.stringify(this))
 		return this;
+	},
+	remove: function(){
+		// remove from list
+		TASKS.splice(this._id, 1)
+		// give remaining task new id's
+		for (var task = 0; task < TASKS.length; task++) {
+	        $("#task_wrapper").find('[data-id="'+TASKS[task]._id+'"]').data('id', task)
+	        TASKS[task]._id = task;
+	    };
+	    // resave them into localstorage
+	    localStorage.clear()
+	    for(task in TASKS){
+	        TASKS[task].save()
+	    }
 	}
 }
 
