@@ -1,9 +1,9 @@
 // require user to provide text
 function Task (obj) {
 	// console.log('Task object created', obj)
-	// this._id = Math.floor(Math.random()*100) // init to number of tasks +1
+	// this.id = Math.floor(Math.random()*100) // init to number of tasks +1
 
-	this._id = obj._id == 'null' ? 0 : obj._id // init to number of tasks +1
+	this.id = obj.id == 'null' ? 0 : obj.id // init to number of tasks +1
 	this.status = obj.status || 'incomplete' // init to incomplete
 	this.text = obj.text || throwErr("need text to make a task") //throw "Text Required"
 	this.description = obj.description || null; //throwErr('need a description so you know what to do ') // init to description if provided
@@ -58,7 +58,7 @@ Task.prototype = {
 		var collapse_id, due_date, title, description, completed_state, priority, tags;
 	    var _title, _body;
 
-	    collapse_id = this._id;
+	    collapse_id = this.id;
 	    due_date = this.due_date;
 	    title = this.text;
 	    // if description is null, set to false
@@ -119,11 +119,11 @@ Task.prototype = {
 	},
 	remove: function(){
 		// remove from list
-		TASKS.splice(this._id, 1)
+		TASKS.splice(this.id, 1)
 		// give remaining task new id's
 		for (var task = 0; task < TASKS.length; task++) {
-	        $("#task_wrapper").find('[data-id="'+TASKS[task]._id+'"]').data('id', task)
-	        TASKS[task]._id = task;
+	        $("#task_wrapper").find('[data-id="'+TASKS[task].id+'"]').data('id', task)
+	        TASKS[task].id = task;
 	    };
 	    // resave them into localstorage
 	    localStorage.clear()
