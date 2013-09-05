@@ -81,9 +81,9 @@ Task.prototype = {
 	        _body = COLLAPSE_ELEMENT.replace('{collapse_id}', collapse_id)
 
 	        // turn into empty string if it doesn't exist
-	        description = description ? description : '';
-	        tags = tags ? build_tags(tags) : '';
-	        subtasks = subtasks ? build_subtasks(subtasks) : '';
+	        description = description ? description+'<br/>' : '';
+	        tags = tags ? this.build_tags()+'<br/>' : '';
+	        subtasks = subtasks ? this.build_subtasks()+'<br/>' : '';
 
 	        // replace in template string
 	        _body = _body.replace('{description}', description)
