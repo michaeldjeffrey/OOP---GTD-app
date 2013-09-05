@@ -154,7 +154,7 @@ $(function(){
         TASKS.push(task)
         localstorage_save(task);
         task.render()
-        text.val('');
+        $(".task-title").val('');
     });
 
     // add complex task
