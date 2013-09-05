@@ -19,8 +19,6 @@ function complex_task_defaults(){
 function resort_tasks_on_drag_stop(){
     var tasks = $("#task_wrapper").children();
     for (var task = 0; task < tasks.length; task++) {
-        console.log("tasks", tasks)
-        console.log("task", $(tasks[task]).data('id'))
         TASKS[$(tasks[task]).data('id')]._id = task;
     };
 }
@@ -48,7 +46,6 @@ function localstorage_retrieve(){
     return saved_tasks
 }
 function localstorage_save(task){
-    console.log(task)
     localStorage.setItem(task._id, JSON.stringify(task))
 }
 function localstorage_delete(task){

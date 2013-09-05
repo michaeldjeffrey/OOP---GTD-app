@@ -12,7 +12,7 @@ var STAR_IMPORTANCE = {
     2: {star: 'icon-star', text: 'Very Important'}
 }
 var COMPLEX_TASK_INPUTS = [
-    'title',
+    'text',
     'description',
     'tags',
     'datepicker',
@@ -52,7 +52,6 @@ $(function(){
     $("#task_wrapper").sortable({
         connectWith: '.connectedSortable, #trash',
         stop: function(event, ui){
-            console.log("I'ms still getting called because I'm a little bitch")
             resort_tasks_on_drag_stop();
             localstorage_resort_delete_save();
         }
@@ -154,7 +153,7 @@ $(function(){
         var task = new Task({text: text.val(), priority: 0, _id: TASKS.length});
         TASKS.push(task)
         localstorage_save(task);
-        render_task(task);
+        task.render()
         text.val('');
     });
 
@@ -172,14 +171,12 @@ $(function(){
         variables['subtasks'] = complex_task_subtasks()
         variables['sort_order'] = TASKS.length
         variables['_id'] = TASKS.length
-
         var task = new Task(variables)
-        render_task(task)
+        task.render()
         TASKS.push(task)
         localstorage_save(task)
 
         complex_task_defaults()
-        console.log(variables)
     });
 })
 //============================== RENDER TASKS =====================================
