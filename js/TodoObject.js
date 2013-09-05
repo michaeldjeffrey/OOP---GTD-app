@@ -95,11 +95,26 @@ Task.prototype = {
 	    }
 	    // if()
 	    $('#task_wrapper').append(_title);
-	    TASKS.push(this)
 	    return this;
 	},
+	build_subtasks: function(){
+	    // TODO: make this display nicer output
+	    var temp_string = '';
+	    $.each(this.subtasks, function(key, value){
+	        temp_string += value.text+", "
+	    })
+	    return temp_string;
+	},
+	build_tags: function(){
+		var temp_string = '';
+		$.each(this.tags, function(key, value){
+	        // TODO: replace &emsp; with a class
+	        temp_string += '<span class="label label-info">'+ value +'</span>&emsp;'
+		})
+	    return temp_string
+	},
 	save: function(){
-		localStorage.setItem(this._id, JSON.stringify(this))
+		localStorage.setItem(this.id, JSON.stringify(this))
 		return this;
 	},
 	remove: function(){
