@@ -37,8 +37,24 @@
 			<div class="accordion" id="task_wrapper">
 			</div>
 			<div id="trash">
-					<i class="icon-trash trash muted" data-toggle="tooltip" title="Drag items here to remove"></i>
-				</div>
+				<i class="icon-trash trash muted" data-toggle="tooltip" title="Drag items here to remove"></i>
+				<button class="btn btn-danger" id="delete_bulk">Delete Selected</button>
+				<a href="#delete_modal" class="btn btn-danger" data-toggle='modal' id='delete_all_trigger'>Delete All</a>
+			</div>
+		</div>
+
+		<div id="delete_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModL" aria-hidden="true">
+			<div class="modal-header">
+				<button class="close" aria-hidden="true" data-dismiss="modal" type="button">&times;</button>
+				<h3>Are you sure?</h3>
+			</div>
+			<div class="modal-body">
+				<div class="text-error">Are you sure you would like to delete all of your tasks?</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				<button id="delete_all" class="btn btn-danger" type="button">Delete</button>
+			</div>
 		</div>
 
 
