@@ -31,7 +31,11 @@ function resort_on_task_remove(){
     for (var task = 0; task < TASKS.length; task++) {
         $("#task_wrapper").find('[data-id="'+TASKS[task].id+'"]').data('id', task)
         TASKS[task].id = task;
-    };
+    }
+    localStorage.clear()
+    $.each(TASKS, function(index, task){
+        task.save()
+    })
 }
 
 function unfade_all_tasks(){
@@ -49,23 +53,3 @@ function localstorage_retrieve(){
     }
     return saved_tasks
 }
-//======================== TASK RENDERING =========================
-var TASK_ELEMENT =  "<div class='accordion-group {completed_state}' data-id='{collapse_id}'> \
-                        <div class='accordion-heading'> \
-                            <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' href='#collapse_{collapse_id}'> \
-                                {title} \
-                                <i id='check_{collapse_id}' data-status='{completed_state}' class='{completed_state_class} checkStyle pull-left'></i> \
-                                <i id='item_star_{collapse_id}' data-importance='{importance}' class='{priority} starStyle pull-left'></i> \
-                                <div class='sepLine pull-left'></div> \
-                                <span class='pull-right'>{due_date}</span> \
-                            </a> \
-                        </div> \
-                        {collapse} \
-                    </div>";
-var COLLAPSE_ELEMENT = "<div id='collapse_{collapse_id}' class='accordion-body collapse in'> \
-                            <div class='accordion-inner'> \
-                                {description} \
-                                {tags} \
-                                {subtasks} \
-                             </div> \
-                        </div>";
