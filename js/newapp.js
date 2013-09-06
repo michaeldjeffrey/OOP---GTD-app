@@ -50,11 +50,8 @@ $(function(){
     })
     // Make the tasks resortable
     $("#task_wrapper").sortable({
-        connectWith: '.connectedSortable, #trash',
-        stop: function(event, ui){
-            resort_tasks_on_drag_stop();
-            localstorage_resort_delete_save();
-        }
+        connectWith: '#trash',
+        stop: resort_tasks_on_drag_stop
     }).disableSelection();
     // Drop the tasks on the trash to delete them
     $("#trash").droppable({
