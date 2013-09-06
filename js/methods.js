@@ -18,13 +18,13 @@ function complex_task_defaults(){
 
 function resort_tasks_on_drag_stop(){
     var tasks = $("#task_wrapper").children();
-    for (var task in tasks) {
-        TASKS[$(tasks[task]).data('id')].id = task;
-    }
+    $.each(tasks, function(index, element){
+        TASKS[$(element).data('id')].id = index;
+    })
     localStorage.clear()
-    for(var task in TASKS){
-        TASKS[task].save()
-    }
+    $.each(TASKS, function(index, task){
+        task.save()
+    })
 }
 
 function resort_on_task_remove(){
