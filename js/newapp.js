@@ -70,14 +70,6 @@ $(function(){
         }
     })
 //=========================== BUTTON CLICK METHODS =============================
-    // show delete buttons when trash is clicked
-    $("#trash").on('click', 'i', function(){
-        SHOW_DELETE = SHOW_DELETE == 'show' ? 'hide' : 'show';
-        $(".accordion-group").find('[type="checkbox"]').each(function(index, task){
-            $(this).animate({width: SHOW_DELETE})
-        })
-        $('#delete_bulk, #delete_all_trigger').toggleClass('trash')
-    })
     // Set importance data in modal window
     $("#importance-btn").on('click', function(){
         var star = $(this).find('i');
@@ -95,6 +87,14 @@ $(function(){
     $("#task_wrapper").on('click', 'input[type="checkbox"]', function(e){
         e.stopPropagation()
     })
+    // show delete buttons when trash is clicked
+    $("#trash").on('click', 'i', function(){
+        SHOW_DELETE = SHOW_DELETE == 'show' ? 'hide' : 'show';
+        $(".accordion-group").find('[type="checkbox"]').each(function(index, task){
+            $(this).animate({width: SHOW_DELETE})
+        })
+        $('#delete_bulk, #delete_all_trigger').toggleClass('trash')
+    })
     // bulk delete
     $("#delete_bulk").on('click', function(){
         temp_tasks = TASKS.splice(0)
@@ -105,12 +105,15 @@ $(function(){
         })
         TASKS = temp_tasks.filter(function(){return true;})
         resort_on_task_remove()
+        $("#trash i").trigger('click')
     })
     // delete all tasks
     $("#delete_all").on('click', function(){
         $("#task_wrapper").empty()
         TASKS = []
         resort_on_task_remove()
+        $("#trash i").trigger('click')
+
     })
     // When a tasks checkmark is clicked
     $('#task_wrapper').on('click', "[id^='check_']", function(e){
