@@ -87,34 +87,22 @@ $(function(){
     $('#task_wrapper').on('click', "[id^='check_']", function(e){
         e.stopPropagation();
         var active_task = $(this).closest('.accordion-group').data("id")
-        for(task in TASKS){
-            if(TASKS[task].id == active_task){
-                TASKS[task].status = TASKS[task].status == 'incomplete' ? 'completed' : 'incomplete';
-                localstorage_save(TASKS[task])
-            }
-        }
+        var status = $(this).closest('.accordion-group').hasClass('completed') ? 'incomplete' : 'completed';
+        TASKS[active_task].setStatus(status).save()
         $(this)
             .toggleClass('icon-check-sign')
             .toggleClass('icon-check-empty')
             .closest('.accordion-group')
             .toggleClass('completed');
     });
+    // When a tasks star is clicked
     $("#task_wrapper").on('click', "[id^='item_star_']", function(e){
         e.stopPropagation();
-        // TODO: save the task importance
-        var star = $(this).data('importance');
-        $(this).removeClass(STAR_IMPORTANCE[star]['star'])
+        var star = $(this).removeClass(STAR_IMPORTANCE[star]['star']).data('importance');
         star = star == 2 ? $(this).data('importance', 0).data('importance') : $(this).data('importance', ++star).data('importance');
         $(this).addClass(STAR_IMPORTANCE[star]['star'])
         var active_task = $(this).closest('.accordion-group').data('id');
-        for(task in TASKS){
-            if(TASKS[task].id == active_task){
-                console.log(TASKS[task])
-                TASKS[task].priority = star;
-                console.log(TASKS[task])
-                localstorage_save(TASKS[task])
-            }
-        }
+        TASKS[active_task].setPriority(star).save()
     })
 
 //============================== ADDING TASKS =====================================
