@@ -115,6 +115,12 @@ $(function(){
         TASKS.push(task)
         $(".task-title").val('');
     });
+    // make task on enter in simple task bar
+    $('#simple_task_text').on('keydown', function(event){
+        if(event.keyCode==13){
+            $('#add_simple_task').trigger('click');
+        }
+    });
 
     // add complex task
     $("#add_complex_task").on('click', function(e){
