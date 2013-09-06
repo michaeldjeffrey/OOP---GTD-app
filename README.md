@@ -4,18 +4,18 @@ OOP---GTD-app
 TODO list
 ----------
 - [ ] Different Themes
-- [X] Adding Tasks
-- [X] Prioritize tasks
-- [X] Completing Tasks
-- [X] Removing All Tasks
-- [X] Removing Selected Tasks
+- [x] Adding Tasks
+- [x] Prioritize tasks
+- [x] Completing Tasks
+- [x] Removing All Tasks
+- [x] Removing Selected Tasks
 - [ ] Removing Completed Tasks
 - [ ] View Archive
 - [ ] Editing Task
 - [ ] Audio Alerts
 - [ ] Send list through email
-- [X] Set Due Dates
-- [X] Grouping (with tags)
+- [x] Set Due Dates
+- [x] Grouping (with tags)
 - [ ] Repeated Tasks
-- [X] Subtasks
+- [x] Subtasks
 - [ ] batch edit
