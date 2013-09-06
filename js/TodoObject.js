@@ -121,16 +121,13 @@ Task.prototype = {
 		// remove from list
 		TASKS.splice(this.id, 1)
 		// give remaining task new id's
-		for (var task = 0; task < TASKS.length; task++) {
-	        $("#task_wrapper").find('[data-id="'+TASKS[task].id+'"]').data('id', task)
-	        TASKS[task].id = task;
-	    };
-	    // resave them into localstorage
-	    localStorage.clear()
-	    for(task in TASKS){
-	        TASKS[task].save()
-	    }
-	    return this;
+		resort_on_task_remove()
+    // resave them into localstorage
+    localStorage.clear()
+    for(task in TASKS){
+        TASKS[task].save()
+    }
+    return this;
 	},
 	setStatus: function(val){
 		this.status = val;
