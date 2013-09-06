@@ -58,11 +58,7 @@ $(function(){
         accept: ".accordion-group",
         hoverClass: "active",
         drop: function(event, ui) {
-            event.stopPropagation();
-            event.preventDefault();
-            var id = ui.draggable.data('id')
             ui.draggable.remove();
-            TASKS[id].remove()
         }
     });
 //=========================== SEARCH BY TAGS =============================
