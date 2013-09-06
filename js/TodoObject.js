@@ -7,7 +7,7 @@ function Task (obj) {
 	this.status = obj.status || 'incomplete' // init to incomplete
 	this.text = obj.text || throwErr("need text to make a task") //throw "Text Required"
 	this.description = obj.description || null; //throwErr('need a description so you know what to do ') // init to description if provided
-	this.priority = obj.priority // init to low
+	this.priority = obj.priority || 0 // init to low
 
 	this.tags = [];
 	if(obj.tags !== undefined){
@@ -76,7 +76,7 @@ Task.prototype = {
 	    _title = _title.replace("{completed_state_class}", TASK_STATUS[completed_state])
 	    _title = _title.replace("{importance}", priority)
 	    _title = _title.replace("{priority}", STAR_IMPORTANCE[priority]['star'])
-	    
+
 	    if(description || tags || subtasks){
 	        _body = COLLAPSE_ELEMENT.replace('{collapse_id}', collapse_id)
 
@@ -131,6 +131,14 @@ Task.prototype = {
 	        TASKS[task].save()
 	    }
 	    return this;
+	},
+	setStatus: function(val){
+		this.status = val;
+		return this;
+	},
+	setPriority: function(val){
+		this.priority = val;
+		return this;
 	}
 }
 
