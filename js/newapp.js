@@ -141,8 +141,9 @@ $(function(){
     $('#add_simple_task').on('click', function(e){
         e.preventDefault();
         var text = $("#simple_task_text");
-        var task = new Task({text: text.val(), priority: 0, _id: TASKS.length});
+        var task = new Task({text: text.val(), priority: 0, id: TASKS.length});
         task.render().save()
+        TASKS.push(task)
         $(".task-title").val('');
     });
 
@@ -163,6 +164,7 @@ $(function(){
 
         var task = new Task(variables)
         task.render().save()
+        TASKS.push(task)
 
         complex_task_defaults()
     });
