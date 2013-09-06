@@ -41,7 +41,12 @@ $(function(){
         drop: function(event, ui) {
             ui.draggable.remove();
         }
-    });
+    }).on('click', 'i', function(){
+        $(".accordion-group").find('[type="checkbox"]').each(function(index, task){
+            $(this).animate({width: 'toggle'})
+        })
+        $('#delete_bulk, #delete_all_trigger').toggleClass('trash')
+    })
 //=========================== SEARCH BY TAGS =============================
     $("#search").autocomplete({
         source: AUTOCOMPLETE_TAGS,
@@ -83,6 +88,28 @@ $(function(){
     $("#complex_task_add_subtask").on('click', function(){
         $(this).parent().append("<br><input class='clearfix input-large' type='text' name='subtask_title' placeholder='subtask title'> ")
     });
+    // be able to click checkbox for bulk delete
+    $("#task_wrapper").on('click', 'input[type="checkbox"]', function(e){
+        e.stopPropagation()
+    })
+    // bulk delete
+    $("#delete_bulk").on('click', function(){
+        temp_tasks = TASKS.splice(0)
+        $(".accordion-group").find('[type="checkbox"]:checked').each(function(index, task){
+            delete temp_tasks[$(task).data('id')]
+            console.log(temp_tasks)
+            $(this).closest('.accordion-group').remove()
+        })
+        TASKS = temp_tasks.filter(function(){return true;})
+        resort_on_task_remove()
+    })
+    // delete all tasks
+    // code for delete modal goes here
+    $("#delete_all").on('click', function(){
+        $("#task_wrapper").empty()
+        TASKS = []
+        resort_on_task_remove()
+    })
     // When a tasks checkmark is clicked
     $('#task_wrapper').on('click', "[id^='check_']", function(e){
         e.stopPropagation();
@@ -130,7 +157,6 @@ $(function(){
         })
         variables['due_date'] = variables['datepicker'] + ' ' + variables['clockpick'];
         variables['tags'] = variables['tags'].split(',')
-        // TODO: convert to object method
         variables['due_date'] = moment(variables['due_date']).fromNow();
         variables['priority'] = STAR_IMPORTANCE_STATE;
         variables['subtasks'] = complex_task_subtasks()
