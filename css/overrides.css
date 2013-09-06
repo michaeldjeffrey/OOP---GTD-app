@@ -5,6 +5,12 @@
 .well{
      box-sizing: border-box;
 }
+/* Bootstrap has ridiculous default modal sizes */
+.modal-body{
+  min-height: 50px;
+  max-height: 450px;
+  height: auto;
+}
 /* style hovered elements in jquery ui autocomplete */
 .ui-autocomplete{
     padding: 0;
@@ -30,4 +36,28 @@
 }
 .select2-choices{
     border-radius: 5px;
+}
+/* so the buttons don't go all crazy when expanding */
+#delete_bulk,
+#delete_all_trigger {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  padding: 0;
+  transition: all 300ms ease;
+  -webkit-transition: all 300ms ease ;
+  border: none;
+
+}
+#delete_bulk.trash,
+#delete_all_trigger.trash {
+  width: 130px;
+  padding: 4px 12px;
+  border: inherit;
+  border: 1px solid;
+  border-color: rgb(189, 54, 47) rgb(189, 54, 47) rgb(128, 36, 32);
+}
+input[type='checkbox']{
+  margin-right: 10px;
+  z-index: 1000;
 }
