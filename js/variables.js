@@ -17,6 +17,7 @@ var COMPLEX_TASK_INPUTS = [
     'datepicker',
     'clockpick',
 ]
+var SHOW_DELETE = 'hide';
 //======================== TASK RENDERING =========================
 var TASK_ELEMENT =  "<div class='accordion-group {completed_state}' data-id='{collapse_id}'> \
                         <div class='accordion-heading'> \

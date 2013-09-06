@@ -41,11 +41,6 @@ $(function(){
         drop: function(event, ui) {
             ui.draggable.remove();
         }
-    }).on('click', 'i', function(){
-        $(".accordion-group").find('[type="checkbox"]').each(function(index, task){
-            $(this).animate({width: 'toggle'})
-        })
-        $('#delete_bulk, #delete_all_trigger').toggleClass('trash')
     })
 //=========================== SEARCH BY TAGS =============================
     $("#search").autocomplete({
@@ -75,6 +70,14 @@ $(function(){
         }
     })
 //=========================== BUTTON CLICK METHODS =============================
+    // show delete buttons when trash is clicked
+    $("#trash").on('click', 'i', function(){
+        SHOW_DELETE = SHOW_DELETE == 'show' ? 'hide' : 'show';
+        $(".accordion-group").find('[type="checkbox"]').each(function(index, task){
+            $(this).animate({width: SHOW_DELETE})
+        })
+        $('#delete_bulk, #delete_all_trigger').toggleClass('trash')
+    })
     // Set importance data in modal window
     $("#importance-btn").on('click', function(){
         var star = $(this).find('i');
@@ -104,7 +107,6 @@ $(function(){
         resort_on_task_remove()
     })
     // delete all tasks
-    // code for delete modal goes here
     $("#delete_all").on('click', function(){
         $("#task_wrapper").empty()
         TASKS = []
