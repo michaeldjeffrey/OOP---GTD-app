@@ -31,10 +31,6 @@ function Task (obj) {
 
 Task.prototype = {
 	constructor: Task,
-	remove: function(self) {
-		//remove self
-		this = null;
-	},
 	add_tags: function(tags) {
 		if(tags !== undefined){
 			for( var tag in tags){
@@ -122,12 +118,11 @@ Task.prototype = {
 		TASKS.splice(this.id, 1)
 		// give remaining task new id's
 		resort_on_task_remove()
-    // resave them into localstorage
-    localStorage.clear()
-    for(task in TASKS){
-        TASKS[task].save()
-    }
-    return this;
+	    // resave them into localstorage
+	    localStorage.clear()
+	    for(task in TASKS){
+	        TASKS[task].save()
+	    }
 	},
 	setStatus: function(val){
 		this.status = val;

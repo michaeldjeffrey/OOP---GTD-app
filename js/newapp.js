@@ -39,6 +39,7 @@ $(function(){
         accept: ".accordion-group",
         hoverClass: "active",
         drop: function(event, ui) {
+            TASKS[ui.draggable.data('id')].remove()
             ui.draggable.remove();
         }
     })
