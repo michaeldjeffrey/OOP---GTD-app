@@ -131,7 +131,8 @@ $(function(){
     // When a tasks star is clicked
     $("#task_wrapper").on('click', "[id^='item_star_']", function(e){
         e.stopPropagation();
-        var star = $(this).removeClass(STAR_IMPORTANCE[star]['star']).data('importance');
+        var star = $(this).data('importance');
+        $(this).removeClass(STAR_IMPORTANCE[star]['star'])
         star = star == 2 ? $(this).data('importance', 0).data('importance') : $(this).data('importance', ++star).data('importance');
         $(this).addClass(STAR_IMPORTANCE[star]['star'])
         var active_task = $(this).closest('.accordion-group').data('id');
